@@ -39,7 +39,7 @@ typedef _Atomic ptrdiff_t atomic_ptrdiff_t;
 typedef _Atomic intmax_t atomic_intmax_t;
 typedef _Atomic uintmax_t atomic_uintmax_t;
 
-typdef enum {
+typedef enum {
     memory_order_relaxed = 0,
     memory_order_consume = 1,
     memory_order_acquire = 2,
