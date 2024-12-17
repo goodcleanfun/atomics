@@ -1,11 +1,11 @@
 #ifndef ATOMICS_H
 #define ATOMICS_H
 
-#if defined(_MSC_VER) && !defined(__clang__)
 #include <stdbool.h>
 #include <stdint.h>
 #include <stddef.h>
 
+/*
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #define ATOMICS_UNDEF_WIN32_LEAN_AND_MEAN
@@ -16,7 +16,7 @@
 #endif
 #endif
 
-#include <intrin.h>
+#include <intrin.h>*/
 
 #define _Atomic(T) volatile T
 
@@ -453,7 +453,7 @@ static bool atomic_compare_exchange_uintmax_t(atomic_uintmax_t *obj, uintmax_t *
         const atomic_ptrdiff_t * : atomic_compare_exchange_ptrdiff_t, \
         atomic_intmax_t * : atomic_compare_exchange_intmax_t, \
         const atomic_intmax_t * : atomic_compare_exchange_intmax_t, \
-        atomic_uintmax_t * :  atomic_compare_exchange_uintmax_t \
+        atomic_uintmax_t * :  atomic_compare_exchange_uintmax_t, \
         const atomic_uintmax_t * :  atomic_compare_exchange_uintmax_t \
     )(obj, expected, desired)
 
@@ -640,7 +640,7 @@ static bool atomic_compare_exchange_explicit_uintmax_t(atomic_uintmax_t *obj, ui
         const atomic_ptrdiff_t * : atomic_compare_exchange_explicit_ptrdiff_t, \
         atomic_intmax_t * : atomic_compare_exchange_explicit_intmax_t, \
         const atomic_intmax_t * : atomic_compare_exchange_explicit_intmax_t, \
-        atomic_uintmax_t * :  atomic_compare_exchange_explicit_uintmax_t \
+        atomic_uintmax_t * :  atomic_compare_exchange_explicit_uintmax_t, \
         const atomic_uintmax_t * :  atomic_compare_exchange_explicit_uintmax_t \
     )(obj, expected, desired, success, failure)
 
@@ -771,7 +771,8 @@ static inline uintmax_t atomic_fetch_add_uintmax_t(atomic_uintmax_t *obj, uintma
         const atomic_ptrdiff_t * : atomic_fetch_add_ptrdiff_t, \
         atomic_intmax_t * : atomic_fetch_add_intmax_t, \
         const atomic_intmax_t * : atomic_fetch_add_intmax_t, \
-        atomic_uintmax_t * :  atomic_fetch_add_uintmax_t \
+        atomic_uintmax_t * :  atomic_fetch_add_uintmax_t, \
+        const atomic_uintmax_t * :  atomic_fetch_add_uintmax_t \
     )(obj, arg)
 
 #define atomic_fetch_sub(obj, arg) atomic_fetch_add(obj, -(arg))
@@ -846,12 +847,10 @@ static inline bool atomic_is_lock_free_uintmax_t(atomic_uintmax_t *obj) { (void)
         const atomic_ptrdiff_t : atomic_is_lock_free_ptrdiff_t, \
         atomic_intmax_t : atomic_is_lock_free_intmax_t, \
         const atomic_intmax_t : atomic_is_lock_free_intmax_t, \
-        atomic_uintmax_t: atomic_is_lock_free_uintmax_t \
+        atomic_uintmax_t: atomic_is_lock_free_uintmax_t, \
+        const atomic_uintmax_t: atomic_is_lock_free_uintmax_t \
     )(obj)
 
 
 
-#else
-#include <stdatomic.h>
-#endif // #if defined(_MSC_VER) && !defined(__clang__)
 #endif // ATOMICS_H
