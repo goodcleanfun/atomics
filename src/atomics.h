@@ -781,12 +781,12 @@ static inline uintmax_t atomic_fetch_add_uintmax_t(atomic_uintmax_t *obj, uintma
 
 
 static inline _Bool atomic_flag_test_and_set(atomic_flag *obj) {
-    char val = 0;
-    return atomic_compare_exchange_strong(&obj->_Value, &val, 1) ? 0 : 1;
+    _Bool val = 0;
+    return atomic_compare_exchange_strong(&(obj->_Value), &val, 1) ? 0 : 1;
 }
 
 static inline void atomic_flag_clear(atomic_flag* obj) {
-    atomic_store(&obj->_Value, 0);
+    atomic_store(&(obj->_Value), 0);
 }
 
 #define atomic_flag_test_and_set_explicit(obj, order) atomic_flag_test_and_set(obj)
