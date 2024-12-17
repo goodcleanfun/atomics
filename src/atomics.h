@@ -67,58 +67,58 @@ typedef enum {
     type *: func, \
     const type *: func
 
-static inline _Bool atomic_load_bool(const volatile atomic_bool *obj) {
+static inline _Bool atomic_load_bool(const atomic_bool *obj) {
     _Bool val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline char atomic_load_char(const volatile atomic_char *obj) {
+static inline char atomic_load_char(const atomic_char *obj) {
     char val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline signed char atomic_load_schar(const volatile atomic_schar *obj) {
+static inline signed char atomic_load_schar(const atomic_schar *obj) {
     signed char val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned char atomic_load_uchar(const volatile atomic_uchar *obj) {
+static inline unsigned char atomic_load_uchar(const atomic_uchar *obj) {
     unsigned char val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline short atomic_load_short(const volatile atomic_short *obj) {
+static inline short atomic_load_short(const atomic_short *obj) {
     short val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned short atomic_load_ushort(const volatile atomic_ushort *obj) {
+static inline unsigned short atomic_load_ushort(const atomic_ushort *obj) {
     unsigned short val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline int atomic_load_int(const volatile atomic_int *obj) {
+static inline int atomic_load_int(const atomic_int *obj) {
     int val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned int atomic_load_uint(const volatile atomic_uint *obj) {
+static inline unsigned int atomic_load_uint(const atomic_uint *obj) {
     unsigned int val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline long atomic_load_long(const volatile atomic_long *obj) {
+static inline long atomic_load_long(const atomic_long *obj) {
     long val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned long atomic_load_ulong(const volatile atomic_ulong *obj) {
+static inline unsigned long atomic_load_ulong(const atomic_ulong *obj) {
     unsigned long val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline long long atomic_load_llong(const volatile atomic_llong *obj) {
+static inline long long atomic_load_llong(const atomic_llong *obj) {
     long long val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned long long atomic_load_ullong(const volatile atomic_ullong *obj) {
+static inline unsigned long long atomic_load_ullong(const atomic_ullong *obj) {
     unsigned long long val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline intptr_t atomic_load_intptr_t(const volatile atomic_intptr_t *obj) {
+static inline intptr_t atomic_load_intptr_t(const atomic_intptr_t *obj) {
     intptr_t val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline uintptr_t atomic_load_uintptr_t(const volatile atomic_uintptr_t *obj) {
+static inline uintptr_t atomic_load_uintptr_t(const atomic_uintptr_t *obj) {
     uintptr_t val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline size_t atomic_load_size_t(const volatile atomic_size_t *obj) {
+static inline size_t atomic_load_size_t(const atomic_size_t *obj) {
     size_t val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline ptrdiff_t atomic_load_ptrdiff_t(const volatile atomic_ptrdiff_t *obj) {
+static inline ptrdiff_t atomic_load_ptrdiff_t(const atomic_ptrdiff_t *obj) {
     ptrdiff_t val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline intmax_t atomic_load_intmax_t(const volatile atomic_intmax_t *obj) {
+static inline intmax_t atomic_load_intmax_t(const atomic_intmax_t *obj) {
     intmax_t val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline uintmax_t atomic_load_uintmax_t(const volatile atomic_uintmax_t *obj) {
+static inline uintmax_t atomic_load_uintmax_t(const atomic_uintmax_t *obj) {
     uintmax_t val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
 
@@ -277,109 +277,109 @@ static inline __int64 ms_interlocked_compare_exchange_i64(__int64 volatile *addr
     return _InterlockedCompareExchange64((__int64 *)addr, exchange, compare);
 }
 
-static inline _Bool atomic_compare_exchange_bool(volatile atomic_bool *obj, _Bool *expected, _Bool desired) {
+static inline _Bool atomic_compare_exchange_bool(atomic_bool *obj, _Bool *expected, _Bool desired) {
     _Bool val = *expected;
     *expected = ms_interlocked_compare_exchange_i8((volatile __int8 *)obj, (__int8)val, (__int8)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_char(volatile atomic_char *obj, char *expected, char desired) {
+static inline _Bool atomic_compare_exchange_char(atomic_char *obj, char *expected, char desired) {
     char val = *expected;
     *expected = ms_interlocked_compare_exchange_i8((volatile __int8 *)obj, (__int8)val, (__int8)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_schar(volatile atomic_schar *obj, signed char *expected, signed char desired) {
+static inline _Bool atomic_compare_exchange_schar(atomic_schar *obj, signed char *expected, signed char desired) {
     signed char val = *expected;
     *expected = ms_interlocked_compare_exchange_i8((volatile __int8 *)obj, (__int8)val, (__int8)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_uchar(volatile atomic_uchar *obj, unsigned char *expected, unsigned char desired) {
+static inline _Bool atomic_compare_exchange_uchar(atomic_uchar *obj, unsigned char *expected, unsigned char desired) {
     unsigned char val = *expected;
     *expected = ms_interlocked_compare_exchange_i8((volatile __int8 *)obj, (__int8)val, (__int8)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_short(volatile atomic_short *obj, short *expected, short desired) {
+static inline _Bool atomic_compare_exchange_short(atomic_short *obj, short *expected, short desired) {
     short val = *expected;
     *expected = ms_interlocked_compare_exchange_i16((volatile __int16 *)obj, (__int16)val, (__int16)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_ushort(volatile atomic_ushort *obj, unsigned short *expected, unsigned short desired) {
+static inline _Bool atomic_compare_exchange_ushort(atomic_ushort *obj, unsigned short *expected, unsigned short desired) {
     unsigned short val = *expected;
     *expected = ms_interlocked_compare_exchange_i16((volatile __int16 *)obj, (__int16)val, (__int16)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_int(volatile atomic_int *obj, int *expected, int desired) {
+static inline _Bool atomic_compare_exchange_int(atomic_int *obj, int *expected, int desired) {
     int val = *expected;
     *expected = ms_interlocked_compare_exchange_i32((volatile __int32 *)obj, (__int32)val, (__int32)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_uint(volatile atomic_uint *obj, unsigned int *expected, unsigned int desired) {
+static inline _Bool atomic_compare_exchange_uint(atomic_uint *obj, unsigned int *expected, unsigned int desired) {
     unsigned int val = *expected;
     *expected = ms_interlocked_compare_exchange_i32((volatile __int32 *)obj, (__int32)val, (__int32)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_long(volatile atomic_long *obj, long *expected, long desired) {
+static inline _Bool atomic_compare_exchange_long(atomic_long *obj, long *expected, long desired) {
     long val = *expected;
     *expected = ms_interlocked_compare_exchange_i32((volatile __int32 *)obj, (__int32)val, (__int32)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_ulong(volatile atomic_ulong *obj, unsigned long *expected, unsigned long desired) {
+static inline _Bool atomic_compare_exchange_ulong(atomic_ulong *obj, unsigned long *expected, unsigned long desired) {
     unsigned long val = *expected;
     *expected = ms_interlocked_compare_exchange_i32((volatile __int32 *)obj, (__int32)val, (__int32)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_llong(volatile atomic_llong *obj, long long *expected, long long desired) {
+static inline _Bool atomic_compare_exchange_llong(atomic_llong *obj, long long *expected, long long desired) {
     long long val = *expected;
     *expected = ms_interlocked_compare_exchange_i64((volatile __int64 *)obj, (__int64)val, (__int64)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_ullong(volatile atomic_ullong *obj, unsigned long long *expected, unsigned long long desired) {
+static inline _Bool atomic_compare_exchange_ullong(atomic_ullong *obj, unsigned long long *expected, unsigned long long desired) {
     unsigned long long val = *expected;
     *expected = ms_interlocked_compare_exchange_i64((volatile __int64 *)obj, (__int64)val, (__int64)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_intptr_t(volatile atomic_intptr_t *obj, intptr_t *expected, intptr_t desired) {
+static inline _Bool atomic_compare_exchange_intptr_t(atomic_intptr_t *obj, intptr_t *expected, intptr_t desired) {
     intptr_t val = *expected;
     *expected = ms_interlocked_compare_exchange_i64((volatile __int64 *)obj, (__int64)val, (__int64)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_uintptr_t(volatile atomic_uintptr_t *obj, uintptr_t *expected, uintptr_t desired) {
+static inline _Bool atomic_compare_exchange_uintptr_t(atomic_uintptr_t *obj, uintptr_t *expected, uintptr_t desired) {
     uintptr_t val = *expected;
     *expected = ms_interlocked_compare_exchange_i64((volatile __int64 *)obj, (__int64)val, (__int64)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_size_t(volatile atomic_size_t *obj, size_t *expected, size_t desired) {
+static inline _Bool atomic_compare_exchange_size_t(atomic_size_t *obj, size_t *expected, size_t desired) {
     size_t val = *expected;
     *expected = ms_interlocked_compare_exchange_i64((volatile __int64 *)obj, (__int64)val, (__int64)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_ptrdiff_t(volatile atomic_ptrdiff_t *obj, ptrdiff_t *expected, ptrdiff_t desired) {
+static inline _Bool atomic_compare_exchange_ptrdiff_t(atomic_ptrdiff_t *obj, ptrdiff_t *expected, ptrdiff_t desired) {
     ptrdiff_t val = *expected;
     *expected = ms_interlocked_compare_exchange_i64((volatile __int64 *)obj, (__int64)val, (__int64)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_intmax_t(volatile atomic_intmax_t *obj, intmax_t *expected, intmax_t desired) {
+static inline _Bool atomic_compare_exchange_intmax_t(atomic_intmax_t *obj, intmax_t *expected, intmax_t desired) {
     intmax_t val = *expected;
     *expected = ms_interlocked_compare_exchange_i64((volatile __int64 *)obj, (__int64)val, (__int64)desired);
     return *expected == val;
 }
 
-static inline _Bool atomic_compare_exchange_uintmax_t(volatile atomic_uintmax_t *obj, uintmax_t *expected, uintmax_t desired) {
+static inline _Bool atomic_compare_exchange_uintmax_t(atomic_uintmax_t *obj, uintmax_t *expected, uintmax_t desired) {
     uintmax_t val = *expected;
     *expected = ms_interlocked_compare_exchange_i64((volatile __int64 *)obj, (__int64)val, (__int64)desired);
     return *expected == val;
@@ -428,126 +428,126 @@ static inline atomic_signal_fence(memory_order order) {
     _ReadWriteBarrier();
 }
 
-static inline _Bool atomic_compare_exchange_explicit_bool(volatile atomic_bool *obj, _Bool *expected, _Bool desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_bool(atomic_bool *obj, _Bool *expected, _Bool desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_bool(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_char(volatile atomic_char *obj, char *expected, char desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_char(atomic_char *obj, char *expected, char desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_char(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_schar(volatile atomic_schar *obj, signed char *expected, signed char desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_schar(atomic_schar *obj, signed char *expected, signed char desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_schar(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_uchar(volatile atomic_uchar *obj, unsigned char *expected, unsigned char desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_uchar(atomic_uchar *obj, unsigned char *expected, unsigned char desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_uchar(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_short(volatile atomic_short *obj, short *expected, short desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_short(atomic_short *obj, short *expected, short desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_short(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_ushort(volatile atomic_ushort *obj, unsigned short *expected, unsigned short desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_ushort(atomic_ushort *obj, unsigned short *expected, unsigned short desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_ushort(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_int(volatile atomic_int *obj, int *expected, int desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_int(atomic_int *obj, int *expected, int desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_int(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_uint(volatile atomic_uint *obj, unsigned int *expected, unsigned int desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_uint(atomic_uint *obj, unsigned int *expected, unsigned int desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_uint(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_long(volatile atomic_long *obj, long *expected, long desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_long(atomic_long *obj, long *expected, long desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_long(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_ulong(volatile atomic_ulong *obj, unsigned long *expected, unsigned long desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_ulong(atomic_ulong *obj, unsigned long *expected, unsigned long desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_ulong(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_llong(volatile atomic_llong *obj, long long *expected, long long desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_llong(atomic_llong *obj, long long *expected, long long desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_llong(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_ullong(volatile atomic_ullong *obj, unsigned long long *expected, unsigned long long desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_ullong(atomic_ullong *obj, unsigned long long *expected, unsigned long long desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_ullong(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_intptr_t(volatile atomic_intptr_t *obj, intptr_t *expected, intptr_t desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_intptr_t(atomic_intptr_t *obj, intptr_t *expected, intptr_t desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_intptr_t(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_uintptr_t(volatile atomic_uintptr_t *obj, uintptr_t *expected, uintptr_t desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_uintptr_t(atomic_uintptr_t *obj, uintptr_t *expected, uintptr_t desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_uintptr_t(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_size_t(volatile atomic_size_t *obj, size_t *expected, size_t desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_size_t(atomic_size_t *obj, size_t *expected, size_t desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_size_t(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_ptrdiff_t(volatile atomic_ptrdiff_t *obj, ptrdiff_t *expected, ptrdiff_t desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_ptrdiff_t(atomic_ptrdiff_t *obj, ptrdiff_t *expected, ptrdiff_t desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_ptrdiff_t(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_intmax_t(volatile atomic_intmax_t *obj, intmax_t *expected, intmax_t desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_intmax_t(atomic_intmax_t *obj, intmax_t *expected, intmax_t desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_intmax_t(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
     return ret;
 }
 
-static inline _Bool atomic_compare_exchange_explicit_uintmax_t(volatile atomic_uintmax_t *obj, uintmax_t *expected, uintmax_t desired, memory_order success, memory_order failure) {
+static inline _Bool atomic_compare_exchange_explicit_uintmax_t(atomic_uintmax_t *obj, uintmax_t *expected, uintmax_t desired, memory_order success, memory_order failure) {
     atomic_thread_fence(success);
     _Bool ret = atomic_compare_exchange_uintmax_t(obj, expected, desired);
     if (!ret) atomic_thread_fence(failure);
@@ -843,12 +843,12 @@ atomic_fetch_op(atomic_fetch_xor_uintmax_t, atomic_uintmax_t, uintmax_t, ^)
 
 #define atomic_fetch_xor_explicit(obj, arg, order) atomic_fetch_xor(obj, arg)
 
-static inline _Bool atomic_flag_test_and_set(volatile atomic_flag* obj) {
+static inline _Bool atomic_flag_test_and_set(atomic_flag* obj) {
     char val = 0;
     return atomic_compare_exchange_strong(&obj->_Value, &val, 1) ? 0 : 1;
 }
 
-static inline void atomic_flag_clear(volatile atomic_flag* obj) {
+static inline void atomic_flag_clear(atomic_flag* obj) {
     atomic_store(&obj->_Value, 0);
 }
 
