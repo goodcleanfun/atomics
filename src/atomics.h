@@ -18,26 +18,26 @@
 
 #include <intrin.h>
 
-#define _Atomic volatile
+#define _Atomic(T) volatile T
 
-typedef _Atomic bool atomic_bool;
-typedef _Atomic char atomic_char;
-typedef _Atomic signed char atomic_schar;
-typedef _Atomic unsigned char atomic_uchar;
-typedef _Atomic short atomic_short;
-typedef _Atomic unsigned short atomic_ushort;
-typedef _Atomic int atomic_int;
-typedef _Atomic unsigned int atomic_uint;
-typedef _Atomic long atomic_long;
-typedef _Atomic unsigned long atomic_ulong;
-typedef _Atomic long long atomic_llong;
-typedef _Atomic unsigned long long atomic_ullong;
-typedef _Atomic intptr_t atomic_intptr_t;
-typedef _Atomic uintptr_t atomic_uintptr_t;
-typedef _Atomic size_t atomic_size_t;
-typedef _Atomic ptrdiff_t atomic_ptrdiff_t;
-typedef _Atomic intmax_t atomic_intmax_t;
-typedef _Atomic uintmax_t atomic_uintmax_t;
+typedef _Atomic(bool) atomic_bool;
+typedef _Atomic(char) atomic_char;
+typedef _Atomic(signed char) atomic_schar;
+typedef _Atomic(unsigned char) atomic_uchar;
+typedef _Atomic(short) atomic_short;
+typedef _Atomic(unsigned short) atomic_ushort;
+typedef _Atomic(int) atomic_int;
+typedef _Atomic(unsigned int) atomic_uint;
+typedef _Atomic(long) atomic_long;
+typedef _Atomic(unsigned long) atomic_ulong;
+typedef _Atomic(long long) atomic_llong;
+typedef _Atomic(unsigned long long) atomic_ullong;
+typedef _Atomic(intptr_t) atomic_intptr_t;
+typedef _Atomic(uintptr_t) atomic_uintptr_t;
+typedef _Atomic(size_t) atomic_size_t;
+typedef _Atomic(ptrdiff_t) atomic_ptrdiff_t;
+typedef _Atomic(intmax_t) atomic_intmax_t;
+typedef _Atomic(uintmax_t) atomic_uintmax_t;
 
 typedef struct atomic_flag { atomic_bool _Value; } atomic_flag;
 
@@ -60,10 +60,6 @@ typedef enum {
 #define ATOMIC_LONG_LOCK_FREE 1
 #define ATOMIC_LLONG_LOCK_FREE 1
 #define ATOMIC_POINTER_LOCK_FREE 1
-
-#define atomic_init(PTR, VAL) \
-    atomic_store_explicit((PTR), (VAL), memory_order_relaxed)
-
 
 static inline bool atomic_load_bool(const atomic_bool *obj) {
     bool val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
@@ -293,6 +289,9 @@ static inline atomic_exchange_uintmax_t(atomic_uintmax_t *obj, uintmax_t desired
 #define atomic_store(obj, desired) atomic_exchange(obj, desired)
 #define atomic_exchange_explicit(obj, desired, order) atomic_exchange(obj, desired)
 #define atomic_store_explicit(obj, desired, order) atomic_exchange(obj, desired)
+
+#define atomic_init(PTR, VAL) \
+    atomic_store_explicit((PTR), (VAL), memory_order_relaxed)
 
 static inline __int8 ms_interlocked_compare_exchange_i8(__int8 volatile *addr, __int8 exchange, __int8 compare) {
     return _InterlockedCompareExchange8(addr, exchange, compare);
