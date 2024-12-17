@@ -73,7 +73,7 @@ jobs:
           mkdir -p deps\threading
           curl -L https://raw.githubusercontent.com/goodcleanfun/threading/refs/heads/main/src/threading.h -o deps\threading\threading.h
       - name: Run tests with MSVC
-        run: make CC=cl CFLAGS="/std:c11" test
+        run: make CC=cl CFLAGS="/std:c11 /volatile:iso" test
 
   test-windows-mingw:
     runs-on: windows-latest
