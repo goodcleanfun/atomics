@@ -413,7 +413,7 @@ static inline _Bool atomic_compare_exchange_uintmax_t(atomic_uintmax_t *obj, uin
     return *expected == val;
 }
 
-#define atomic_compare_exchange_genericg(obj, expected, desired) \
+#define atomic_compare_exchange_generic(obj, expected, desired) \
     _Generic((obj), \
         atomic_bool * : atomic_compare_exchange_bool, \
         const atomic_bool * : atomic_compare_exchange_bool, \
