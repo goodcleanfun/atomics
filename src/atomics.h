@@ -39,6 +39,8 @@ typedef _Atomic ptrdiff_t atomic_ptrdiff_t;
 typedef _Atomic intmax_t atomic_intmax_t;
 typedef _Atomic uintmax_t atomic_uintmax_t;
 
+typedef struct atomic_flag { atomic_bool _Value; } atomic_flag;
+
 typedef enum {
     memory_order_relaxed = 0,
     memory_order_consume = 1,
@@ -778,17 +780,7 @@ static inline uintmax_t atomic_fetch_add_uintmax_t(atomic_uintmax_t *obj, uintma
 #define atomic_fetch_sub_explicit(obj, arg, order) atomic_fetch_sub(obj, arg)
 
 
-
-#define __C11_ATOMIC_FETCH_OP_TEMPLATE(prefix,type,op) static inline type           \
-    __concat3(prefix,atomic_,type)(__concat2(atomic_,type) *obj, type arg) {        \
-    type oldval, newval;                                                            \
-    do { oldval = atomic_load(obj); newval = oldval op arg; }                       \
-    while (!atomic_compare_exchange_strong(obj, &oldval, newval));                  \
-    return oldval;                                                                  \
-}
-
-
-static inline _Bool atomic_flag_test_and_set(atomic_flag* obj) {
+static inline _Bool atomic_flag_test_and_set(atomic_flag *obj) {
     char val = 0;
     return atomic_compare_exchange_strong(&obj->_Value, &val, 1) ? 0 : 1;
 }
