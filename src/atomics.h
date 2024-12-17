@@ -60,58 +60,58 @@ typedef enum {
 #define ATOMIC_LLONG_LOCK_FREE 1
 #define ATOMIC_POINTER_LOCK_FREE 1
 
-static inline _Bool atomic_load_bool(const atomic_bool *obj) {
+static _Bool atomic_load_bool(const atomic_bool *obj) {
     _Bool val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline char atomic_load_char(const atomic_char *obj) {
+static char atomic_load_char(const atomic_char *obj) {
     char val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline signed char atomic_load_schar(const atomic_schar *obj) {
+static signed char atomic_load_schar(const atomic_schar *obj) {
     signed char val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned char atomic_load_uchar(const atomic_uchar *obj) {
+static unsigned char atomic_load_uchar(const atomic_uchar *obj) {
     unsigned char val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline short atomic_load_short(const atomic_short *obj) {
+static short atomic_load_short(const atomic_short *obj) {
     short val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned short atomic_load_ushort(const atomic_ushort *obj) {
+static unsigned short atomic_load_ushort(const atomic_ushort *obj) {
     unsigned short val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline int atomic_load_int(const atomic_int *obj) {
+static int atomic_load_int(const atomic_int *obj) {
     int val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned int atomic_load_uint(const atomic_uint *obj) {
+static unsigned int atomic_load_uint(const atomic_uint *obj) {
     unsigned int val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline long atomic_load_long(const atomic_long *obj) {
+static long atomic_load_long(const atomic_long *obj) {
     long val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned long atomic_load_ulong(const atomic_ulong *obj) {
+static unsigned long atomic_load_ulong(const atomic_ulong *obj) {
     unsigned long val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline long long atomic_load_llong(const atomic_llong *obj) {
+static long long atomic_load_llong(const atomic_llong *obj) {
     long long val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned long long atomic_load_ullong(const atomic_ullong *obj) {
+static unsigned long long atomic_load_ullong(const atomic_ullong *obj) {
     unsigned long long val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline intptr_t atomic_load_intptr_t(const atomic_intptr_t *obj) {
+static intptr_t atomic_load_intptr_t(const atomic_intptr_t *obj) {
     intptr_t val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline uintptr_t atomic_load_uintptr_t(const atomic_uintptr_t *obj) {
+static uintptr_t atomic_load_uintptr_t(const atomic_uintptr_t *obj) {
     uintptr_t val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline size_t atomic_load_size_t(const atomic_size_t *obj) {
+static size_t atomic_load_size_t(const atomic_size_t *obj) {
     size_t val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline ptrdiff_t atomic_load_ptrdiff_t(const atomic_ptrdiff_t *obj) {
+static ptrdiff_t atomic_load_ptrdiff_t(const atomic_ptrdiff_t *obj) {
     ptrdiff_t val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline intmax_t atomic_load_intmax_t(const atomic_intmax_t *obj) {
+static intmax_t atomic_load_intmax_t(const atomic_intmax_t *obj) {
     intmax_t val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline uintmax_t atomic_load_uintmax_t(const atomic_uintmax_t *obj) {
+static uintmax_t atomic_load_uintmax_t(const atomic_uintmax_t *obj) {
     uintmax_t val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
 
@@ -157,91 +157,91 @@ static inline uintmax_t atomic_load_uintmax_t(const atomic_uintmax_t *obj) {
 #define atomic_load(obj) atomic_load_generic(obj)
 
 
-static inline __int8 ms_interlocked_exchange_i8(__int8 volatile *addr, __int8 desired) {
+static __int8 ms_interlocked_exchange_i8(__int8 volatile *addr, __int8 desired) {
     return _InterlockedExchange8(addr, desired);
 }
 
-static inline __int16 ms_interlocked_exchange_i16(__int16 volatile *addr, __int16 desired) {
+static __int16 ms_interlocked_exchange_i16(__int16 volatile *addr, __int16 desired) {
     return _InterlockedExchange16((__int16 *)addr, desired);
 }
 
-static inline __int32 ms_interlocked_exchange_i32(__int32 volatile *addr, __int32 desired) {
+static __int32 ms_interlocked_exchange_i32(__int32 volatile *addr, __int32 desired) {
     return _InterlockedExchange((long *)addr, desired);
 }
 
-static inline __int64 ms_interlocked_exchange_i64(__int64 volatile *addr, __int64 desired) {
+static __int64 ms_interlocked_exchange_i64(__int64 volatile *addr, __int64 desired) {
     return _InterlockedExchange64((__int64 *)addr, desired);
 }
 
-static inline atomic_exchange_bool(atomic_bool *obj, _Bool desired) {
+static atomic_exchange_bool(atomic_bool *obj, _Bool desired) {
     return ms_interlocked_exchange_i8((volatile __int8 *)obj, desired);
 }
 
-static inline atomic_exchange_char(atomic_char *obj, char desired) {
+static atomic_exchange_char(atomic_char *obj, char desired) {
     return ms_interlocked_exchange_i8((volatile __int8 *)obj, desired);
 }
 
-static inline atomic_exchange_schar(atomic_schar *obj, signed char desired) {
+static atomic_exchange_schar(atomic_schar *obj, signed char desired) {
     return ms_interlocked_exchange_i8((volatile __int8 *)obj, desired);
 }
 
-static inline atomic_exchange_uchar(atomic_uchar *obj, unsigned char desired) {
+static atomic_exchange_uchar(atomic_uchar *obj, unsigned char desired) {
     return ms_interlocked_exchange_i8((volatile __int8 *)obj, desired);
 }
 
-static inline atomic_exchange_short(atomic_short *obj, short desired) {
+static atomic_exchange_short(atomic_short *obj, short desired) {
     return ms_interlocked_exchange_i16((volatile __int16 *)obj, desired);
 }
 
-static inline atomic_exchange_ushort(atomic_ushort *obj, unsigned short desired) {
+static atomic_exchange_ushort(atomic_ushort *obj, unsigned short desired) {
     return ms_interlocked_exchange_i16((volatile __int16 *)obj, desired);
 }
 
-static inline atomic_exchange_int(atomic_int *obj, int desired) {
+static atomic_exchange_int(atomic_int *obj, int desired) {
     return ms_interlocked_exchange_i32((volatile __int32 *)obj, desired);
 }
 
-static inline atomic_exchange_uint(atomic_uint *obj, unsigned int desired) {
+static atomic_exchange_uint(atomic_uint *obj, unsigned int desired) {
     return ms_interlocked_exchange_i32((volatile __int32 *)obj, desired);
 }
 
-static inline atomic_exchange_long(atomic_long *obj, long desired) {
+static atomic_exchange_long(atomic_long *obj, long desired) {
     return ms_interlocked_exchange_i32((volatile __int32 *)obj, desired);
 }
 
-static inline atomic_exchange_ulong(atomic_ulong *obj, unsigned long desired) {
+static atomic_exchange_ulong(atomic_ulong *obj, unsigned long desired) {
     return ms_interlocked_exchange_i32((volatile __int32 *)obj, desired);
 }
 
-static inline atomic_exchange_llong(atomic_llong *obj, long long desired) {
+static atomic_exchange_llong(atomic_llong *obj, long long desired) {
     return ms_interlocked_exchange_i64((volatile __int64 *)obj, desired);
 }
 
-static inline atomic_exchange_ullong(atomic_ullong *obj, unsigned long long desired) {
+static atomic_exchange_ullong(atomic_ullong *obj, unsigned long long desired) {
     return ms_interlocked_exchange_i64((volatile __int64 *)obj, desired);
 }
 
-static inline atomic_exchange_intptr_t(atomic_intptr_t *obj, intptr_t desired) {
+static atomic_exchange_intptr_t(atomic_intptr_t *obj, intptr_t desired) {
     return ms_interlocked_exchange_i64((volatile __int64 *)obj, desired);
 }
 
-static inline atomic_exchange_uintptr_t(atomic_uintptr_t *obj, uintptr_t desired) {
+static atomic_exchange_uintptr_t(atomic_uintptr_t *obj, uintptr_t desired) {
     return ms_interlocked_exchange_i64((volatile __int64 *)obj, desired);
 }
 
-static inline atomic_exchange_size_t(atomic_size_t *obj, size_t desired) {
+static atomic_exchange_size_t(atomic_size_t *obj, size_t desired) {
     return ms_interlocked_exchange_i64((volatile __int64 *)obj, desired);
 }
 
-static inline atomic_exchange_ptrdiff_t(atomic_ptrdiff_t *obj, ptrdiff_t desired) {
+static atomic_exchange_ptrdiff_t(atomic_ptrdiff_t *obj, ptrdiff_t desired) {
     return ms_interlocked_exchange_i64((volatile __int64 *)obj, desired);
 }
 
-static inline atomic_exchange_intmax_t(atomic_intmax_t *obj, intmax_t desired) {
+static atomic_exchange_intmax_t(atomic_intmax_t *obj, intmax_t desired) {
     return ms_interlocked_exchange_i64((volatile __int64 *)obj, desired);
 }
 
-static inline atomic_exchange_uintmax_t(atomic_uintmax_t *obj, uintmax_t desired) {
+static atomic_exchange_uintmax_t(atomic_uintmax_t *obj, uintmax_t desired) {
     return ms_interlocked_exchange_i64((volatile __int64 *)obj, desired);
 }
 
@@ -292,19 +292,19 @@ static inline atomic_exchange_uintmax_t(atomic_uintmax_t *obj, uintmax_t desired
 #define atomic_init(PTR, VAL) \
     atomic_store_explicit((PTR), (VAL), memory_order_relaxed)
 
-static inline __int8 ms_interlocked_compare_exchange_i8(__int8 volatile *addr, __int8 exchange, __int8 compare) {
+static __int8 ms_interlocked_compare_exchange_i8(__int8 volatile *addr, __int8 exchange, __int8 compare) {
     return _InterlockedCompareExchange8(addr, exchange, compare);
 }
 
-static inline __int16 ms_interlocked_compare_exchange_i16(__int16 volatile *addr, __int16 exchange, __int16 compare) {
+static __int16 ms_interlocked_compare_exchange_i16(__int16 volatile *addr, __int16 exchange, __int16 compare) {
     return _InterlockedCompareExchange16((__int16 *)addr, exchange, compare);
 }
 
-static inline __int32 ms_interlocked_compare_exchange_i32(__int32 volatile *addr, __int32 exchange, __int32 compare) {
+static __int32 ms_interlocked_compare_exchange_i32(__int32 volatile *addr, __int32 exchange, __int32 compare) {
     return _InterlockedCompareExchange((long *)addr, exchange, compare);
 }
 
-static inline __int64 ms_interlocked_compare_exchange_i64(__int64 volatile *addr, __int64 exchange, __int64 compare) {
+static __int64 ms_interlocked_compare_exchange_i64(__int64 volatile *addr, __int64 exchange, __int64 compare) {
     return _InterlockedCompareExchange64((__int64 *)addr, exchange, compare);
 }
 
@@ -460,7 +460,7 @@ static _Bool atomic_compare_exchange_uintmax_t(atomic_uintmax_t *obj, uintmax_t 
 #define atomic_compare_exchange_strong(obj, expected, desired) atomic_compare_exchange_generic((obj), (expected), (desired))
 #define atomic_compare_exchange_weak(obj, expected, desired) atomic_compare_exchange_generic((obj), (expected), (desired))
 
-static inline void atomic_thread_fence(memory_order order) {
+static void atomic_thread_fence(memory_order order) {
     if (order == memory_order_relaxed) {
         return;
     } else if (order == memory_order_consume || order == memory_order_acquire) {
@@ -472,7 +472,7 @@ static inline void atomic_thread_fence(memory_order order) {
     }
 }
 
-static inline void atomic_signal_fence(memory_order order) {
+static void atomic_signal_fence(memory_order order) {
     (void)order;
     _ReadWriteBarrier();
 }
@@ -646,91 +646,91 @@ static _Bool atomic_compare_exchange_explicit_uintmax_t(atomic_uintmax_t *obj, u
 #define atomic_compare_exchange_strong_explicit(obj, expected, desired, success, failure) atomic_compare_exchange_strong_explicit_generic(obj, expected, desired, success, failure)
 #define atomic_compare_exchange_weak_explicit(obj, expected, desired, success, failure) atomic_compare_exchange_strong_explicit_generic(obj, expected, desired, success, failure)
 
-static inline __int8 ms_interlocked_exchange_add_i8(__int8 volatile *addr, __int8 val) {
+static __int8 ms_interlocked_exchange_add_i8(__int8 volatile *addr, __int8 val) {
     return _InterlockedExchangeAdd8(addr, val);
 }
 
-static inline __int16 ms_interlocked_exchange_add_i16(__int16 volatile *addr, __int16 val) {
+static __int16 ms_interlocked_exchange_add_i16(__int16 volatile *addr, __int16 val) {
     return _InterlockedExchangeAdd16(addr, val);
 }
 
-static inline __int32 ms_interlocked_exchange_add_i32(__int32 volatile *addr, __int32 val) {
+static __int32 ms_interlocked_exchange_add_i32(__int32 volatile *addr, __int32 val) {
     return _InterlockedExchangeAdd(addr, val);
 }
 
-static inline __int64 ms_interlocked_exchange_add_i64(__int64 volatile *addr, __int64 val) {
+static __int64 ms_interlocked_exchange_add_i64(__int64 volatile *addr, __int64 val) {
     return _InterlockedExchangeAdd64(addr, val);
 }
 
-static inline _Bool atomic_fetch_add_bool(atomic_bool *obj, _Bool val) {
+static _Bool atomic_fetch_add_bool(atomic_bool *obj, _Bool val) {
     return ms_interlocked_exchange_add_i8((__int8 volatile *)obj, val);
 }
 
-static inline char atomic_fetch_add_char(atomic_char *obj, char val) {
+static char atomic_fetch_add_char(atomic_char *obj, char val) {
     return ms_interlocked_exchange_add_i8((__int8 volatile *)obj, val);
 }
 
-static inline signed char atomic_fetch_add_schar(atomic_schar *obj, signed char val) {
+static signed char atomic_fetch_add_schar(atomic_schar *obj, signed char val) {
     return ms_interlocked_exchange_add_i8((__int8 volatile *)obj, val);
 }
 
-static inline unsigned char atomic_fetch_add_uchar(atomic_uchar *obj, unsigned char val) {
+static unsigned char atomic_fetch_add_uchar(atomic_uchar *obj, unsigned char val) {
     return ms_interlocked_exchange_add_i8((__int8 volatile *)obj, val);
 }
 
-static inline short atomic_fetch_add_short(atomic_short *obj, short val) {
+static short atomic_fetch_add_short(atomic_short *obj, short val) {
     return ms_interlocked_exchange_add_i16((__int16 volatile *)obj, val);
 }
 
-static inline unsigned short atomic_fetch_add_ushort(atomic_ushort *obj, unsigned short val) {
+static unsigned short atomic_fetch_add_ushort(atomic_ushort *obj, unsigned short val) {
     return ms_interlocked_exchange_add_i16((__int16 volatile *)obj, val);
 }
 
-static inline int atomic_fetch_add_int(atomic_int *obj, int val) {
+static int atomic_fetch_add_int(atomic_int *obj, int val) {
     return ms_interlocked_exchange_add_i32((__int32 volatile *)obj, val);
 }
 
-static inline unsigned int atomic_fetch_add_uint(atomic_uint *obj, unsigned int val) {
+static unsigned int atomic_fetch_add_uint(atomic_uint *obj, unsigned int val) {
     return ms_interlocked_exchange_add_i32((__int32 volatile *)obj, val);
 }
 
-static inline long atomic_fetch_add_long(atomic_long *obj, long val) {
+static long atomic_fetch_add_long(atomic_long *obj, long val) {
     return ms_interlocked_exchange_add_i32((__int32 volatile *)obj, val);
 }
 
-static inline unsigned long atomic_fetch_add_ulong(atomic_ulong *obj, unsigned long val) {
+static unsigned long atomic_fetch_add_ulong(atomic_ulong *obj, unsigned long val) {
     return ms_interlocked_exchange_add_i32((__int32 volatile *)obj, val);
 }
 
-static inline long long atomic_fetch_add_llong(atomic_llong *obj, long long val) {
+static long long atomic_fetch_add_llong(atomic_llong *obj, long long val) {
     return ms_interlocked_exchange_add_i64((__int64 volatile *)obj, val);
 }
 
-static inline unsigned long long atomic_fetch_add_ullong(atomic_ullong *obj, unsigned long long val) {
+static unsigned long long atomic_fetch_add_ullong(atomic_ullong *obj, unsigned long long val) {
     return ms_interlocked_exchange_add_i64((__int64 volatile *)obj, val);
 }
 
-static inline intptr_t atomic_fetch_add_intptr_t(atomic_intptr_t *obj, intptr_t val) {
+static intptr_t atomic_fetch_add_intptr_t(atomic_intptr_t *obj, intptr_t val) {
     return ms_interlocked_exchange_add_i64((__int64 volatile *)obj, val);
 }
 
-static inline uintptr_t atomic_fetch_add_uintptr_t(atomic_uintptr_t *obj, uintptr_t val) {
+static uintptr_t atomic_fetch_add_uintptr_t(atomic_uintptr_t *obj, uintptr_t val) {
     return ms_interlocked_exchange_add_i64((__int64 volatile *)obj, val);
 }
 
-static inline size_t atomic_fetch_add_size_t(atomic_size_t *obj, size_t val) {
+static size_t atomic_fetch_add_size_t(atomic_size_t *obj, size_t val) {
     return ms_interlocked_exchange_add_i64((__int64 volatile *)obj, val);
 }
 
-static inline ptrdiff_t atomic_fetch_add_ptrdiff_t(atomic_ptrdiff_t *obj, ptrdiff_t val) {
+static ptrdiff_t atomic_fetch_add_ptrdiff_t(atomic_ptrdiff_t *obj, ptrdiff_t val) {
     return ms_interlocked_exchange_add_i64((__int64 volatile *)obj, val);
 }
 
-static inline intmax_t atomic_fetch_add_intmax_t(atomic_intmax_t *obj, intmax_t val) {
+static intmax_t atomic_fetch_add_intmax_t(atomic_intmax_t *obj, intmax_t val) {
     return ms_interlocked_exchange_add_i64((__int64 volatile *)obj, val);
 }
 
-static inline uintmax_t atomic_fetch_add_uintmax_t(atomic_uintmax_t *obj, uintmax_t val) {
+static uintmax_t atomic_fetch_add_uintmax_t(atomic_uintmax_t *obj, uintmax_t val) {
     return ms_interlocked_exchange_add_i64((__int64 volatile *)obj, val);
 }
 
@@ -779,12 +779,12 @@ static inline uintmax_t atomic_fetch_add_uintmax_t(atomic_uintmax_t *obj, uintma
 #define atomic_fetch_sub_explicit(obj, arg, order) atomic_fetch_sub(obj, arg)
 
 /*
-static inline _Bool atomic_flag_test_and_set(atomic_flag *obj) {
+static _Bool atomic_flag_test_and_set(atomic_flag *obj) {
     _Bool val = 0;
     return atomic_compare_exchange_strong(&(obj->_Value), &val, 1) ? 0 : 1;
 }
 
-static inline void atomic_flag_clear(atomic_flag* obj) {
+static void atomic_flag_clear(atomic_flag* obj) {
     atomic_store(&(obj->_Value), 0);
 }
 
@@ -792,24 +792,24 @@ static inline void atomic_flag_clear(atomic_flag* obj) {
 #define atomic_flag_clear_explicit(obj, order) atomic_flag_clear(obj)
 */
 
-static inline _Bool atomic_is_lock_free_bool(atomic_bool *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_char(atomic_char *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_schar(atomic_schar *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_uchar(atomic_uchar *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_short(atomic_short *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_ushort(atomic_ushort *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_int(atomic_int *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_uint(atomic_uint *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_long(atomic_long *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_ulong(atomic_ulong *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_llong(atomic_llong *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_ullong(atomic_ullong *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_intptr_t(atomic_intptr_t *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_uintptr_t(atomic_uintptr_t *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_size_t(atomic_size_t *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_ptrdiff_t(atomic_ptrdiff_t *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_intmax_t(atomic_intmax_t *obj) { (void)obj; return 1; }
-static inline _Bool atomic_is_lock_free_uintmax_t(atomic_uintmax_t *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_bool(atomic_bool *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_char(atomic_char *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_schar(atomic_schar *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_uchar(atomic_uchar *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_short(atomic_short *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_ushort(atomic_ushort *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_int(atomic_int *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_uint(atomic_uint *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_long(atomic_long *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_ulong(atomic_ulong *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_llong(atomic_llong *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_ullong(atomic_ullong *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_intptr_t(atomic_intptr_t *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_uintptr_t(atomic_uintptr_t *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_size_t(atomic_size_t *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_ptrdiff_t(atomic_ptrdiff_t *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_intmax_t(atomic_intmax_t *obj) { (void)obj; return 1; }
+static _Bool atomic_is_lock_free_uintmax_t(atomic_uintmax_t *obj) { (void)obj; return 1; }
 
 #define atomic_is_lock_free(obj) \
     _Generic((obj), \
