@@ -778,7 +778,7 @@ static inline uintmax_t atomic_fetch_add_uintmax_t(atomic_uintmax_t *obj, uintma
 #define atomic_fetch_add_explicit(obj, arg, order) atomic_fetch_add(obj, arg)
 #define atomic_fetch_sub_explicit(obj, arg, order) atomic_fetch_sub(obj, arg)
 
-
+/*
 static inline _Bool atomic_flag_test_and_set(atomic_flag *obj) {
     _Bool val = 0;
     return atomic_compare_exchange_strong(&(obj->_Value), &val, 1) ? 0 : 1;
@@ -790,6 +790,7 @@ static inline void atomic_flag_clear(atomic_flag* obj) {
 
 #define atomic_flag_test_and_set_explicit(obj, order) atomic_flag_test_and_set(obj)
 #define atomic_flag_clear_explicit(obj, order) atomic_flag_clear(obj)
+*/
 
 static inline _Bool atomic_is_lock_free_bool(atomic_bool *obj) { (void)obj; return 1; }
 static inline _Bool atomic_is_lock_free_char(atomic_char *obj) { (void)obj; return 1; }
