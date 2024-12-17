@@ -455,7 +455,7 @@ static inline _Bool atomic_compare_exchange_uintmax_t(atomic_uintmax_t *obj, uin
 
 #define atomic_compare_exchange_weak(obj, expected, desired) atomic_compare_exchange_strong(obj, expected, desired)
 
-static inline atomic_thread_fence(memory_order order) {
+static inline void atomic_thread_fence(memory_order order) {
     if (order == memory_order_relaxed) {
         return;
     } else if (order == memory_order_consume || order == memory_order_acquire) {
@@ -467,7 +467,7 @@ static inline atomic_thread_fence(memory_order order) {
     }
 }
 
-static inline atomic_signal_fence(memory_order order) {
+static inline void atomic_signal_fence(memory_order order) {
     (void)order;
     _ReadWriteBarrier();
 }
