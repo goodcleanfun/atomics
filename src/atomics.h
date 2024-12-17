@@ -700,7 +700,7 @@ static inline uintmax_t atomic_fetch_add_uintmax_t(atomic_uintmax_t *obj, uintma
         do { \
             oldval = atomic_load(obj); \
             newval = oldval op val; \
-        } while (!atomic_compare_exchange_strong(obj, &oldval, newval)); \
+        } while (!(atomic_compare_exchange_strong(obj, &oldval, newval))); \
         return oldval; \
     }
 
