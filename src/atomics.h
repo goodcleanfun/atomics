@@ -701,17 +701,7 @@ static inline uintmax_t atomic_fetch_add_uintmax_t(atomic_uintmax_t *obj, uintma
             oldval = atomic_load(obj); \
             newval = oldval op val; \
         } while (!atomic_compare_exchange_strong(obj, &oldval, newval)); \
-        return oldval; \  
-    }
-
-#define atomic_fetch_op_pointer(name, atomic_type, op) \
-    static inline void *name(atomic_type *obj, ptrdiff_t val) { \
-        ptrdiff_t oldval, newval; \
-        do { \
-            oldval = (ptrdiff_t)atomic_load(obj); \
-            newval = oldval op (ptrdiff_t)val; \
-        } while (!atomic_compare_exchange_strong(obj, (void **)&oldval, (void *)newval)); \
-        return (void *)oldval; \  
+        return oldval; \
     }
 
 atomic_fetch_op(atomic_fetch_and_bool, atomic_bool, _Bool, &)
