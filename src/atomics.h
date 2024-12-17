@@ -117,41 +117,24 @@ static uintmax_t atomic_load_uintmax_t(const atomic_uintmax_t *obj) {
 
 #define atomic_load_generic(obj) \
     _Generic((obj), \
-        atomic_bool * : atomic_load_bool, \
-        const atomic_bool * : atomic_load_bool, \
-        atomic_char * : atomic_load_char, \
-        const atomic_char * : atomic_load_char, \
-        atomic_schar * : atomic_load_schar, \
-        const atomic_schar * : atomic_load_schar, \
-        atomic_uchar * : atomic_load_uchar, \
-        const atomic_uchar * : atomic_load_uchar, \
-        atomic_short * : atomic_load_short, \
-        const atomic_short * : atomic_load_short, \
-        atomic_ushort * : atomic_load_ushort, \
-        const atomic_ushort * : atomic_load_ushort, \
-        atomic_int * : atomic_load_int, \
-        const atomic_int * : atomic_load_int, \
-        atomic_uint * : atomic_load_uint, \
-        const atomic_uint * : atomic_load_uint, \
-        atomic_long * : atomic_load_long, \
-        const atomic_long * : atomic_load_long, \
-        atomic_ulong * : atomic_load_ulong, \
-        const atomic_ulong * : atomic_load_ulong, \
-        atomic_llong * : atomic_load_llong, \
-        const atomic_llong * : atomic_load_llong, \
-        atomic_ullong * : atomic_load_ullong, \
-        const atomic_ullong * : atomic_load_ullong, \
-        atomic_intptr_t * : atomic_load_intptr_t, \
-        const atomic_intptr_t * : atomic_load_intptr_t, \
-        atomic_uintptr_t * : atomic_load_uintptr_t, \
-        const atomic_uintptr_t * : atomic_load_uintptr_t, \
-        atomic_size_t * : atomic_load_size_t, \
-        const atomic_size_t * : atomic_load_size_t, \
-        atomic_ptrdiff_t * : atomic_load_ptrdiff_t, \
-        const atomic_ptrdiff_t * : atomic_load_ptrdiff_t, \
-        atomic_intmax_t * : atomic_load_intmax_t, \
-        const atomic_intmax_t * : atomic_load_intmax_t, \
-        atomic_uintmax_t * :  atomic_load_uintmax_t \
+        atomic_bool *: atomic_load_bool, \
+        atomic_char *: atomic_load_char, \
+        atomic_schar *: atomic_load_schar, \
+        atomic_uchar *: atomic_load_uchar, \
+        atomic_short *: atomic_load_short, \
+        atomic_ushort *: atomic_load_ushort, \
+        atomic_int *: atomic_load_int, \
+        atomic_uint *: atomic_load_uint, \
+        atomic_long *: atomic_load_long, \
+        atomic_ulong *: atomic_load_ulong, \
+        atomic_llong *: atomic_load_llong, \
+        atomic_ullong *: atomic_load_ullong, \
+        atomic_intptr_t *: atomic_load_intptr_t, \
+        atomic_uintptr_t *: atomic_load_uintptr_t, \
+        atomic_size_t *: atomic_load_size_t, \
+        atomic_ptrdiff_t *: atomic_load_ptrdiff_t, \
+        atomic_intmax_t *: atomic_load_intmax_t, \
+        atomic_uintmax_t *:  atomic_load_uintmax_t \
     )(obj)
 
 #define atomic_load(obj) atomic_load_generic(obj)
@@ -247,42 +230,24 @@ static atomic_exchange_uintmax_t(atomic_uintmax_t *obj, uintmax_t desired) {
 
 #define atomic_exchange(obj, desired) \
     _Generic((obj), \
-        atomic_bool * : atomic_exchange_bool, \
-        const atomic_bool * : atomic_exchange_bool, \
-        atomic_char * : atomic_exchange_char, \
-        const atomic_char * : atomic_exchange_char, \
-        atomic_schar * : atomic_exchange_schar, \
-        const atomic_schar * : atomic_exchange_schar, \
-        atomic_uchar * : atomic_exchange_uchar, \
-        const atomic_uchar * : atomic_exchange_uchar, \
-        atomic_short * : atomic_exchange_short, \
-        const atomic_short * : atomic_exchange_short, \
-        atomic_ushort * : atomic_exchange_ushort, \
-        const atomic_ushort * : atomic_exchange_ushort, \
-        atomic_int * : atomic_exchange_int, \
-        const atomic_int * : atomic_exchange_int, \
-        atomic_uint * : atomic_exchange_uint, \
-        const atomic_uint * : atomic_exchange_uint, \
-        atomic_long * : atomic_exchange_long, \
-        const atomic_long * : atomic_exchange_long, \
-        atomic_ulong * : atomic_exchange_ulong, \
-        const atomic_ulong * : atomic_exchange_ulong, \
-        atomic_llong * : atomic_exchange_llong, \
-        const atomic_llong * : atomic_exchange_llong, \
-        atomic_ullong * : atomic_exchange_ullong, \
-        const atomic_ullong * : atomic_exchange_ullong, \
-        atomic_intptr_t * : atomic_exchange_intptr_t, \
-        const atomic_intptr_t * : atomic_exchange_intptr_t, \
-        atomic_uintptr_t * : atomic_exchange_uintptr_t, \
-        const atomic_uintptr_t * : atomic_exchange_uintptr_t, \
-        atomic_size_t * : atomic_exchange_size_t, \
-        const atomic_size_t * : atomic_exchange_size_t, \
-        atomic_ptrdiff_t * : atomic_exchange_ptrdiff_t, \
-        const atomic_ptrdiff_t * : atomic_exchange_ptrdiff_t, \
-        atomic_intmax_t * : atomic_exchange_intmax_t, \
-        const atomic_intmax_t * : atomic_exchange_intmax_t, \
-        atomic_uintmax_t * :  atomic_exchange_uintmax_t \
-        const atomic_uintmax_t * :  atomic_exchange_uintmax_t \
+        atomic_bool *: atomic_exchange_bool, \
+        atomic_char *: atomic_exchange_char, \
+        atomic_schar *: atomic_exchange_schar, \
+        atomic_uchar *: atomic_exchange_uchar, \
+        atomic_short *: atomic_exchange_short, \
+        atomic_ushort *: atomic_exchange_ushort, \
+        atomic_int *: atomic_exchange_int, \
+        atomic_uint *: atomic_exchange_uint, \
+        atomic_long *: atomic_exchange_long, \
+        atomic_ulong *: atomic_exchange_ulong, \
+        atomic_llong *: atomic_exchange_llong, \
+        atomic_ullong *: atomic_exchange_ullong, \
+        atomic_intptr_t *: atomic_exchange_intptr_t, \
+        atomic_uintptr_t *: atomic_exchange_uintptr_t, \
+        atomic_size_t *: atomic_exchange_size_t, \
+        atomic_ptrdiff_t *: atomic_exchange_ptrdiff_t, \
+        atomic_intmax_t *: atomic_exchange_intmax_t, \
+        atomic_uintmax_t *:  atomic_exchange_uintmax_t \
     )(obj, desired)
 
 #define atomic_store(obj, desired) atomic_exchange(obj, desired)
@@ -418,42 +383,24 @@ static _Bool atomic_compare_exchange_uintmax_t(atomic_uintmax_t *obj, uintmax_t 
 
 #define atomic_compare_exchange_generic(obj, expected, desired) \
     _Generic((obj), \
-        atomic_bool * : atomic_compare_exchange_bool, \
-        const atomic_bool * : atomic_compare_exchange_bool, \
-        atomic_char * : atomic_compare_exchange_char, \
-        const atomic_char * : atomic_compare_exchange_char, \
-        atomic_schar * : atomic_compare_exchange_schar, \
-        const atomic_schar * : atomic_compare_exchange_schar, \
-        atomic_uchar * : atomic_compare_exchange_uchar, \
-        const atomic_uchar * : atomic_compare_exchange_uchar, \
-        atomic_short * : atomic_compare_exchange_short, \
-        const atomic_short * : atomic_compare_exchange_short, \
-        atomic_ushort * : atomic_compare_exchange_ushort, \
-        const atomic_ushort * : atomic_compare_exchange_ushort, \
-        atomic_int * : atomic_compare_exchange_int, \
-        const atomic_int * : atomic_compare_exchange_int, \
-        atomic_uint * : atomic_compare_exchange_uint, \
-        const atomic_uint * : atomic_compare_exchange_uint, \
-        atomic_long * : atomic_compare_exchange_long, \
-        const atomic_long * : atomic_compare_exchange_long, \
-        atomic_ulong * : atomic_compare_exchange_ulong, \
-        const atomic_ulong * : atomic_compare_exchange_ulong, \
-        atomic_llong * : atomic_compare_exchange_llong, \
-        const atomic_llong * : atomic_compare_exchange_llong, \
-        atomic_ullong * : atomic_compare_exchange_ullong, \
-        const atomic_ullong * : atomic_compare_exchange_ullong, \
-        atomic_intptr_t * : atomic_compare_exchange_intptr_t, \
-        const atomic_intptr_t * : atomic_compare_exchange_intptr_t, \
-        atomic_uintptr_t * : atomic_compare_exchange_uintptr_t, \
-        const atomic_uintptr_t * : atomic_compare_exchange_uintptr_t, \
-        atomic_size_t * : atomic_compare_exchange_size_t, \
-        const atomic_size_t * : atomic_compare_exchange_size_t, \
-        atomic_ptrdiff_t * : atomic_compare_exchange_ptrdiff_t, \
-        const atomic_ptrdiff_t * : atomic_compare_exchange_ptrdiff_t, \
-        atomic_intmax_t * : atomic_compare_exchange_intmax_t, \
-        const atomic_intmax_t * : atomic_compare_exchange_intmax_t, \
-        atomic_uintmax_t * :  atomic_compare_exchange_uintmax_t, \
-        const atomic_uintmax_t * :  atomic_compare_exchange_uintmax_t \
+        atomic_bool *: atomic_compare_exchange_bool, \
+        atomic_char *: atomic_compare_exchange_char, \
+        atomic_schar *: atomic_compare_exchange_schar, \
+        atomic_uchar *: atomic_compare_exchange_uchar, \
+        atomic_short *: atomic_compare_exchange_short, \
+        atomic_ushort *: atomic_compare_exchange_ushort, \
+        atomic_int *: atomic_compare_exchange_int, \
+        atomic_uint *: atomic_compare_exchange_uint, \
+        atomic_long *: atomic_compare_exchange_long, \
+        atomic_ulong *: atomic_compare_exchange_ulong, \
+        atomic_llong *: atomic_compare_exchange_llong, \
+        atomic_ullong *: atomic_compare_exchange_ullong, \
+        atomic_intptr_t *: atomic_compare_exchange_intptr_t, \
+        atomic_uintptr_t *: atomic_compare_exchange_uintptr_t, \
+        atomic_size_t *: atomic_compare_exchange_size_t, \
+        atomic_ptrdiff_t *: atomic_compare_exchange_ptrdiff_t, \
+        atomic_intmax_t *: atomic_compare_exchange_intmax_t, \
+        atomic_uintmax_t *:  atomic_compare_exchange_uintmax_t \
     )(obj, expected, desired)
 
 
@@ -605,42 +552,24 @@ static _Bool atomic_compare_exchange_explicit_uintmax_t(atomic_uintmax_t *obj, u
 
 #define atomic_compare_exchange_strong_explicit_generic(obj, expected, desired, success, failure) \
     _Generic((obj), \
-        atomic_bool * : atomic_compare_exchange_explicit_bool, \
-        const atomic_bool * : atomic_compare_exchange_explicit_bool, \
-        atomic_char * : atomic_compare_exchange_explicit_char, \
-        const atomic_char * : atomic_compare_exchange_explicit_char, \
-        atomic_schar * : atomic_compare_exchange_explicit_schar, \
-        const atomic_schar * : atomic_compare_exchange_explicit_schar, \
-        atomic_uchar * : atomic_compare_exchange_explicit_uchar, \
-        const atomic_uchar * : atomic_compare_exchange_explicit_uchar, \
-        atomic_short * : atomic_compare_exchange_explicit_short, \
-        const atomic_short * : atomic_compare_exchange_explicit_short, \
-        atomic_ushort * : atomic_compare_exchange_explicit_ushort, \
-        const atomic_ushort * : atomic_compare_exchange_explicit_ushort, \
-        atomic_int * : atomic_compare_exchange_explicit_int, \
-        const atomic_int * : atomic_compare_exchange_explicit_int, \
-        atomic_uint * : atomic_compare_exchange_explicit_uint, \
-        const atomic_uint * : atomic_compare_exchange_explicit_uint, \
-        atomic_long * : atomic_compare_exchange_explicit_long, \
-        const atomic_long * : atomic_compare_exchange_explicit_long, \
-        atomic_ulong * : atomic_compare_exchange_explicit_ulong, \
-        const atomic_ulong * : atomic_compare_exchange_explicit_ulong, \
-        atomic_llong * : atomic_compare_exchange_explicit_llong, \
-        const atomic_llong * : atomic_compare_exchange_explicit_llong, \
-        atomic_ullong * : atomic_compare_exchange_explicit_ullong, \
-        const atomic_ullong * : atomic_compare_exchange_explicit_ullong, \
-        atomic_intptr_t * : atomic_compare_exchange_explicit_intptr_t, \
-        const atomic_intptr_t * : atomic_compare_exchange_explicit_intptr_t, \
-        atomic_uintptr_t * : atomic_compare_exchange_explicit_uintptr_t, \
-        const atomic_uintptr_t * : atomic_compare_exchange_explicit_uintptr_t, \
-        atomic_size_t * : atomic_compare_exchange_explicit_size_t, \
-        const atomic_size_t * : atomic_compare_exchange_explicit_size_t, \
-        atomic_ptrdiff_t * : atomic_compare_exchange_explicit_ptrdiff_t, \
-        const atomic_ptrdiff_t * : atomic_compare_exchange_explicit_ptrdiff_t, \
-        atomic_intmax_t * : atomic_compare_exchange_explicit_intmax_t, \
-        const atomic_intmax_t * : atomic_compare_exchange_explicit_intmax_t, \
-        atomic_uintmax_t * :  atomic_compare_exchange_explicit_uintmax_t, \
-        const atomic_uintmax_t * :  atomic_compare_exchange_explicit_uintmax_t \
+        atomic_bool *: atomic_compare_exchange_explicit_bool, \
+        atomic_char *: atomic_compare_exchange_explicit_char, \
+        atomic_schar *: atomic_compare_exchange_explicit_schar, \
+        atomic_uchar *: atomic_compare_exchange_explicit_uchar, \
+        atomic_short *: atomic_compare_exchange_explicit_short, \
+        atomic_ushort *: atomic_compare_exchange_explicit_ushort, \
+        atomic_int *: atomic_compare_exchange_explicit_int, \
+        atomic_uint *: atomic_compare_exchange_explicit_uint, \
+        atomic_long *: atomic_compare_exchange_explicit_long, \
+        atomic_ulong *: atomic_compare_exchange_explicit_ulong, \
+        atomic_llong *: atomic_compare_exchange_explicit_llong, \
+        atomic_ullong *: atomic_compare_exchange_explicit_ullong, \
+        atomic_intptr_t *: atomic_compare_exchange_explicit_intptr_t, \
+        atomic_uintptr_t *: atomic_compare_exchange_explicit_uintptr_t, \
+        atomic_size_t *: atomic_compare_exchange_explicit_size_t, \
+        atomic_ptrdiff_t *: atomic_compare_exchange_explicit_ptrdiff_t, \
+        atomic_intmax_t *: atomic_compare_exchange_explicit_intmax_t, \
+        atomic_uintmax_t *:  atomic_compare_exchange_explicit_uintmax_t \
     )(obj, expected, desired, success, failure)
 
 #define atomic_compare_exchange_strong_explicit(obj, expected, desired, success, failure) atomic_compare_exchange_strong_explicit_generic(obj, expected, desired, success, failure)
@@ -736,42 +665,24 @@ static uintmax_t atomic_fetch_add_uintmax_t(atomic_uintmax_t *obj, uintmax_t val
 
 #define atomic_fetch_add(obj, arg) \
     _Generic((obj), \
-        atomic_bool * : atomic_fetch_add_bool, \
-        const atomic_bool * : atomic_fetch_add_bool, \
-        atomic_char * : atomic_fetch_add_char, \
-        const atomic_char * : atomic_fetch_add_char, \
-        atomic_schar * : atomic_fetch_add_schar, \
-        const atomic_schar * : atomic_fetch_add_schar, \
-        atomic_uchar * : atomic_fetch_add_uchar, \
-        const atomic_uchar * : atomic_fetch_add_uchar, \
-        atomic_short * : atomic_fetch_add_short, \
-        const atomic_short * : atomic_fetch_add_short, \
-        atomic_ushort * : atomic_fetch_add_ushort, \
-        const atomic_ushort * : atomic_fetch_add_ushort, \
-        atomic_int * : atomic_fetch_add_int, \
-        const atomic_int * : atomic_fetch_add_int, \
-        atomic_uint * : atomic_fetch_add_uint, \
-        const atomic_uint * : atomic_fetch_add_uint, \
-        atomic_long * : atomic_fetch_add_long, \
-        const atomic_long * : atomic_fetch_add_long, \
-        atomic_ulong * : atomic_fetch_add_ulong, \
-        const atomic_ulong * : atomic_fetch_add_ulong, \
-        atomic_llong * : atomic_fetch_add_llong, \
-        const atomic_llong * : atomic_fetch_add_llong, \
-        atomic_ullong * : atomic_fetch_add_ullong, \
-        const atomic_ullong * : atomic_fetch_add_ullong, \
-        atomic_intptr_t * : atomic_fetch_add_intptr_t, \
-        const atomic_intptr_t * : atomic_fetch_add_intptr_t, \
-        atomic_uintptr_t * : atomic_fetch_add_uintptr_t, \
-        const atomic_uintptr_t * : atomic_fetch_add_uintptr_t, \
-        atomic_size_t * : atomic_fetch_add_size_t, \
-        const atomic_size_t * : atomic_fetch_add_size_t, \
-        atomic_ptrdiff_t * : atomic_fetch_add_ptrdiff_t, \
-        const atomic_ptrdiff_t * : atomic_fetch_add_ptrdiff_t, \
-        atomic_intmax_t * : atomic_fetch_add_intmax_t, \
-        const atomic_intmax_t * : atomic_fetch_add_intmax_t, \
-        atomic_uintmax_t * :  atomic_fetch_add_uintmax_t, \
-        const atomic_uintmax_t * :  atomic_fetch_add_uintmax_t \
+        atomic_bool *: atomic_fetch_add_bool, \
+        atomic_char *: atomic_fetch_add_char, \
+        atomic_schar *: atomic_fetch_add_schar, \
+        atomic_uchar *: atomic_fetch_add_uchar, \
+        atomic_short *: atomic_fetch_add_short, \
+        atomic_ushort *: atomic_fetch_add_ushort, \
+        atomic_int *: atomic_fetch_add_int, \
+        atomic_uint *: atomic_fetch_add_uint, \
+        atomic_long *: atomic_fetch_add_long, \
+        atomic_ulong *: atomic_fetch_add_ulong, \
+        atomic_llong *: atomic_fetch_add_llong, \
+        atomic_ullong *: atomic_fetch_add_ullong, \
+        atomic_intptr_t *: atomic_fetch_add_intptr_t, \
+        atomic_uintptr_t *: atomic_fetch_add_uintptr_t, \
+        atomic_size_t *: atomic_fetch_add_size_t, \
+        atomic_ptrdiff_t *: atomic_fetch_add_ptrdiff_t, \
+        atomic_intmax_t *: atomic_fetch_add_intmax_t, \
+        atomic_uintmax_t *:  atomic_fetch_add_uintmax_t \
     )(obj, arg)
 
 #define atomic_fetch_sub(obj, arg) atomic_fetch_add(obj, -(arg))
@@ -781,7 +692,7 @@ static uintmax_t atomic_fetch_add_uintmax_t(atomic_uintmax_t *obj, uintmax_t val
 /*
 static _Bool atomic_flag_test_and_set(atomic_flag *obj) {
     _Bool val = 0;
-    return atomic_compare_exchange_strong(&(obj->_Value), &val, 1) ? 0 : 1;
+    return atomic_compare_exchange_strong(&(obj->_Value), &val, 1) ? 0: 1;
 }
 
 static void atomic_flag_clear(atomic_flag* obj) {
@@ -813,42 +724,24 @@ static _Bool atomic_is_lock_free_uintmax_t(atomic_uintmax_t *obj) { (void)obj; r
 
 #define atomic_is_lock_free(obj) \
     _Generic((obj), \
-        atomic_bool : atomic_is_lock_free_bool, \
-        const atomic_bool : atomic_is_lock_free_bool, \
-        atomic_char : atomic_is_lock_free_char, \
-        const atomic_char : atomic_is_lock_free_char, \
-        atomic_schar : atomic_is_lock_free_schar, \
-        const atomic_schar : atomic_is_lock_free_schar, \
-        atomic_uchar : atomic_is_lock_free_uchar, \
-        const atomic_uchar : atomic_is_lock_free_uchar, \
-        atomic_short : atomic_is_lock_free_short, \
-        const atomic_short : atomic_is_lock_free_short, \
-        atomic_ushort : atomic_is_lock_free_ushort, \
-        const atomic_ushort : atomic_is_lock_free_ushort, \
-        atomic_int : atomic_is_lock_free_int, \
-        const atomic_int : atomic_is_lock_free_int, \
-        atomic_uint : atomic_is_lock_free_uint, \
-        const atomic_uint : atomic_is_lock_free_uint, \
-        atomic_long : atomic_is_lock_free_long, \
-        const atomic_long : atomic_is_lock_free_long, \
-        atomic_ulong : atomic_is_lock_free_ulong, \
-        const atomic_ulong : atomic_is_lock_free_ulong, \
-        atomic_llong : atomic_is_lock_free_llong, \
-        const atomic_llong : atomic_is_lock_free_llong, \
-        atomic_ullong : atomic_is_lock_free_ullong, \
-        const atomic_ullong : atomic_is_lock_free_ullong, \
-        atomic_intptr_t : atomic_is_lock_free_intptr_t, \
-        const atomic_intptr_t : atomic_is_lock_free_intptr_t, \
-        atomic_uintptr_t : atomic_is_lock_free_uintptr_t, \
-        const atomic_uintptr_t : atomic_is_lock_free_uintptr_t, \
-        atomic_size_t : atomic_is_lock_free_size_t, \
-        const atomic_size_t : atomic_is_lock_free_size_t, \
-        atomic_ptrdiff_t : atomic_is_lock_free_ptrdiff_t, \
-        const atomic_ptrdiff_t : atomic_is_lock_free_ptrdiff_t, \
-        atomic_intmax_t : atomic_is_lock_free_intmax_t, \
-        const atomic_intmax_t : atomic_is_lock_free_intmax_t, \
-        atomic_uintmax_t: atomic_is_lock_free_uintmax_t, \
-        const atomic_uintmax_t: atomic_is_lock_free_uintmax_t \
+        atomic_bool: atomic_is_lock_free_bool, \
+        atomic_char: atomic_is_lock_free_char, \
+        atomic_schar: atomic_is_lock_free_schar, \
+        atomic_uchar: atomic_is_lock_free_uchar, \
+        atomic_short: atomic_is_lock_free_short, \
+        atomic_ushort: atomic_is_lock_free_ushort, \
+        atomic_int: atomic_is_lock_free_int, \
+        atomic_uint: atomic_is_lock_free_uint, \
+        atomic_long: atomic_is_lock_free_long, \
+        atomic_ulong: atomic_is_lock_free_ulong, \
+        atomic_llong: atomic_is_lock_free_llong, \
+        atomic_ullong: atomic_is_lock_free_ullong, \
+        atomic_intptr_t: atomic_is_lock_free_intptr_t, \
+        atomic_uintptr_t: atomic_is_lock_free_uintptr_t, \
+        atomic_size_t: atomic_is_lock_free_size_t, \
+        atomic_ptrdiff_t: atomic_is_lock_free_ptrdiff_t, \
+        atomic_intmax_t: atomic_is_lock_free_intmax_t, \
+        atomic_uintmax_t: atomic_is_lock_free_uintmax_t \
     )(obj)
 
 #else
