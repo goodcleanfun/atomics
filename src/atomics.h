@@ -118,7 +118,7 @@ static inline uintmax_t atomic_load_uintmax_t(const atomic_uintmax_t *obj) {
     uintmax_t val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
 
-#define atomic_load(obj) \
+#define atomic_load_generic(obj) \
     _Generic((obj), \
         atomic_bool * : atomic_load_bool, \
         const atomic_bool * : atomic_load_bool, \
@@ -156,6 +156,8 @@ static inline uintmax_t atomic_load_uintmax_t(const atomic_uintmax_t *obj) {
         const atomic_intmax_t * : atomic_load_intmax_t, \
         atomic_uintmax_t * :  atomic_load_uintmax_t \
     )(obj)
+
+#define atomic_load(obj) atomic_load_generic(obj)
 
 
 static inline __int8 ms_interlocked_exchange_i8(__int8 volatile *addr, __int8 desired) {
