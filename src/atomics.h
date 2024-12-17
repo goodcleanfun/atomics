@@ -123,8 +123,7 @@ static inline uintmax_t atomic_load_uintmax_t(const atomic_uintmax_t *obj) {
 }
 
 #define atomic_load(obj) \
-    _Generic(obj) \
-    { \
+    _Generic((obj), \
         _ATOMIC_GENERIC_FUNCS(atomic_bool, atomic_load_bool), \
         _ATOMIC_GENERIC_FUNCS(atomic_char, atomic_load_char), \
         _ATOMIC_GENERIC_FUNCS(atomic_schar, atomic_load_schar), \
@@ -143,7 +142,7 @@ static inline uintmax_t atomic_load_uintmax_t(const atomic_uintmax_t *obj) {
         _ATOMIC_GENERIC_FUNCS(atomic_ptrdiff_t, atomic_load_ptrdiff_t), \
         _ATOMIC_GENERIC_FUNCS(atomic_intmax_t, atomic_load_intmax_t), \
         _ATOMIC_GENERIC_FUNCS(atomic_uintmax_t, atomic_load_uintmax_t) \
-    }(obj)
+    )(obj)
 
 
 static inline __int8 ms_interlocked_exchange_i8(__int8 volatile *addr, __int8 desired) {
@@ -235,8 +234,7 @@ static inline atomic_exchange_uintmax_t(atomic_uintmax_t *obj, uintmax_t desired
 }
 
 #define atomic_exchange(obj, desired) \
-    _Generic(obj) \
-    { \
+    _Generic((obj), \
         _ATOMIC_GENERIC_FUNCS(atomic_bool, atomic_exchange_bool), \
         _ATOMIC_GENERIC_FUNCS(atomic_char, atomic_exchange_char), \
         _ATOMIC_GENERIC_FUNCS(atomic_schar, atomic_exchange_schar), \
@@ -255,7 +253,7 @@ static inline atomic_exchange_uintmax_t(atomic_uintmax_t *obj, uintmax_t desired
         _ATOMIC_GENERIC_FUNCS(atomic_ptrdiff_t, atomic_exchange_ptrdiff_t), \
         _ATOMIC_GENERIC_FUNCS(atomic_intmax_t, atomic_exchange_intmax_t), \
         _ATOMIC_GENERIC_FUNCS(atomic_uintmax_t, atomic_exchange_uintmax_t) \
-    }(obj, desired)
+    )(obj, desired)
 
 #define atomic_store(obj, desired) atomic_exchange(obj, desired)
 #define atomic_exchange_explicit(obj, desired, order) atomic_exchange(obj, desired)
@@ -386,8 +384,7 @@ static inline _Bool atomic_compare_exchange_uintmax_t(atomic_uintmax_t *obj, uin
 }
 
 #define atomic_compare_exchange_strong(obj, expected, desired) \
-    _Generic(obj) \
-    { \
+    _Generic((obj), \
         _ATOMIC_GENERIC_FUNCS(atomic_bool, atomic_compare_exchange_bool), \
         _ATOMIC_GENERIC_FUNCS(atomic_char, atomic_compare_exchange_char), \
         _ATOMIC_GENERIC_FUNCS(atomic_schar, atomic_compare_exchange_schar), \
@@ -406,7 +403,7 @@ static inline _Bool atomic_compare_exchange_uintmax_t(atomic_uintmax_t *obj, uin
         _ATOMIC_GENERIC_FUNCS(atomic_ptrdiff_t, atomic_compare_exchange_ptrdiff_t), \
         _ATOMIC_GENERIC_FUNCS(atomic_intmax_t, atomic_compare_exchange_intmax_t), \
         _ATOMIC_GENERIC_FUNCS(atomic_uintmax_t, atomic_compare_exchange_uintmax_t) \
-    }(obj, expected, desired)
+    )(obj, expected, desired)
 
 
 #define atomic_compare_exchange_weak(obj, expected, desired) atomic_compare_exchange_strong(obj, expected, desired)
@@ -555,8 +552,7 @@ static inline _Bool atomic_compare_exchange_explicit_uintmax_t(atomic_uintmax_t 
 }
 
 #define atomic_compare_exchange_strong_explicit(obj, expected, desired, success, failure) \
-    _Generic(obj) \
-    { \
+    _Generic((obj), \
         _ATOMIC_GENERIC_FUNCS(atomic_bool, atomic_compare_exchange_explicit_bool), \
         _ATOMIC_GENERIC_FUNCS(atomic_char, atomic_compare_exchange_explicit_char), \
         _ATOMIC_GENERIC_FUNCS(atomic_schar, atomic_compare_exchange_explicit_schar), \
@@ -575,7 +571,7 @@ static inline _Bool atomic_compare_exchange_explicit_uintmax_t(atomic_uintmax_t 
         _ATOMIC_GENERIC_FUNCS(atomic_ptrdiff_t, atomic_compare_exchange_explicit_ptrdiff_t), \
         _ATOMIC_GENERIC_FUNCS(atomic_intmax_t, atomic_compare_exchange_explicit_intmax_t), \
         _ATOMIC_GENERIC_FUNCS(atomic_uintmax_t, atomic_compare_exchange_explicit_uintmax_t) \
-    }(obj, expected, desired, success, failure)
+    )(obj, expected, desired, success, failure)
 
 #define atomic_compare_exchange_weak_explicit(obj, expected, desired, success, failure) atomic_compare_exchange_strong_explicit(obj, expected, desired, success, failure)
 
