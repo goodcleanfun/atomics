@@ -1,11 +1,11 @@
 #ifndef ATOMICS_H
 #define ATOMICS_H
 
+#if defined(_MSC_VER) && !defined(__clang__)
 #include <stdbool.h>
 #include <stdint.h>
 #include <stddef.h>
 
-/*
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #define ATOMICS_UNDEF_WIN32_LEAN_AND_MEAN
@@ -16,7 +16,7 @@
 #endif
 #endif
 
-#include <intrin.h>*/
+#include <intrin.h>
 
 #define _Atomic(T) volatile T
 
@@ -851,6 +851,7 @@ static inline bool atomic_is_lock_free_uintmax_t(atomic_uintmax_t *obj) { (void)
         const atomic_uintmax_t: atomic_is_lock_free_uintmax_t \
     )(obj)
 
-
-
+#else
+#include <stdatomic.h>
+#endif // #if defined(_MSC_VER) && !defined(__clang__)
 #endif // ATOMICS_H
