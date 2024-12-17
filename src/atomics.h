@@ -285,6 +285,7 @@ static inline atomic_exchange_uintmax_t(atomic_uintmax_t *obj, uintmax_t desired
         atomic_intmax_t * : atomic_exchange_intmax_t, \
         const atomic_intmax_t * : atomic_exchange_intmax_t, \
         atomic_uintmax_t * :  atomic_exchange_uintmax_t \
+        const atomic_uintmax_t * :  atomic_exchange_uintmax_t \
     )(obj, desired)
 
 #define atomic_store(obj, desired) atomic_exchange(obj, desired)
@@ -452,6 +453,7 @@ static inline _Bool atomic_compare_exchange_uintmax_t(atomic_uintmax_t *obj, uin
         atomic_intmax_t * : atomic_compare_exchange_intmax_t, \
         const atomic_intmax_t * : atomic_compare_exchange_intmax_t, \
         atomic_uintmax_t * :  atomic_compare_exchange_uintmax_t \
+        const atomic_uintmax_t * :  atomic_compare_exchange_uintmax_t \
     )(obj, expected, desired)
 
 
@@ -601,7 +603,7 @@ static inline _Bool atomic_compare_exchange_explicit_uintmax_t(atomic_uintmax_t 
     return ret;
 }
 
-#define atomic_compare_exchange_strong_explicit(obj, expected, desired, success, failure) \
+#define atomic_compare_exchange_strong_explicit_generic(obj, expected, desired, success, failure) \
     _Generic((obj), \
         atomic_bool * : atomic_compare_exchange_explicit_bool, \
         const atomic_bool * : atomic_compare_exchange_explicit_bool, \
@@ -638,9 +640,11 @@ static inline _Bool atomic_compare_exchange_explicit_uintmax_t(atomic_uintmax_t 
         atomic_intmax_t * : atomic_compare_exchange_explicit_intmax_t, \
         const atomic_intmax_t * : atomic_compare_exchange_explicit_intmax_t, \
         atomic_uintmax_t * :  atomic_compare_exchange_explicit_uintmax_t \
+        const atomic_uintmax_t * :  atomic_compare_exchange_explicit_uintmax_t \
     )(obj, expected, desired, success, failure)
 
-#define atomic_compare_exchange_weak_explicit(obj, expected, desired, success, failure) atomic_compare_exchange_strong_explicit(obj, expected, desired, success, failure)
+#define atomic_compare_exchange_strong_explicit(obj, expected, desired, success, failure) atomic_compare_exchange_strong_explicit_generic(obj, expected, desired, success, failure)
+#define atomic_compare_exchange_weak_explicit(obj, expected, desired, success, failure) atomic_compare_exchange_strong_explicit_generic(obj, expected, desired, success, failure)
 
 static inline __int8 ms_interlocked_exchange_add_i8(__int8 volatile *addr, __int8 val) {
     return _InterlockedExchangeAdd8(addr, val);
@@ -774,195 +778,15 @@ static inline uintmax_t atomic_fetch_add_uintmax_t(atomic_uintmax_t *obj, uintma
 #define atomic_fetch_sub_explicit(obj, arg, order) atomic_fetch_sub(obj, arg)
 
 
-#define atomic_fetch_op(name, atomic_type, type, op) \
-    static inline type name(atomic_type *obj, type val) { \
-        type oldval, newval; \
-        do { \
-            oldval = atomic_load(obj); \
-            newval = oldval op val; \
-        } while (!(atomic_compare_exchange_strong(obj, &oldval, newval))); \
-        return oldval; \
-    }
 
-atomic_fetch_op(atomic_fetch_and_bool, atomic_bool, _Bool, &)
-atomic_fetch_op(atomic_fetch_and_char, atomic_char, char, &)
-atomic_fetch_op(atomic_fetch_and_schar, atomic_schar, signed char, &)
-atomic_fetch_op(atomic_fetch_and_uchar, atomic_uchar, unsigned char, &)
-atomic_fetch_op(atomic_fetch_and_short, atomic_short, short, &)
-atomic_fetch_op(atomic_fetch_and_ushort, atomic_ushort, unsigned short, &)
-atomic_fetch_op(atomic_fetch_and_int, atomic_int, int, &)
-atomic_fetch_op(atomic_fetch_and_uint, atomic_uint, unsigned int, &)
-atomic_fetch_op(atomic_fetch_and_long, atomic_long, long, &)
-atomic_fetch_op(atomic_fetch_and_ulong, atomic_ulong, unsigned long, &)
-atomic_fetch_op(atomic_fetch_and_llong, atomic_llong, long long, &)
-atomic_fetch_op(atomic_fetch_and_ullong, atomic_ullong, unsigned long long, &)
-atomic_fetch_op(atomic_fetch_and_intptr_t, atomic_intptr_t, intptr_t, &)
-atomic_fetch_op(atomic_fetch_and_uintptr_t, atomic_uintptr_t, uintptr_t, &)
-atomic_fetch_op(atomic_fetch_and_size_t, atomic_size_t, size_t, &)
-atomic_fetch_op(atomic_fetch_and_ptrdiff_t, atomic_ptrdiff_t, ptrdiff_t, &)
-atomic_fetch_op(atomic_fetch_and_intmax_t, atomic_intmax_t, intmax_t, &)
-atomic_fetch_op(atomic_fetch_and_uintmax_t, atomic_uintmax_t, uintmax_t, &)
+#define __C11_ATOMIC_FETCH_OP_TEMPLATE(prefix,type,op) static inline type           \
+    __concat3(prefix,atomic_,type)(__concat2(atomic_,type) *obj, type arg) {        \
+    type oldval, newval;                                                            \
+    do { oldval = atomic_load(obj); newval = oldval op arg; }                       \
+    while (!atomic_compare_exchange_strong(obj, &oldval, newval));                  \
+    return oldval;                                                                  \
+}
 
-#define atomic_fetch_and(obj, arg) \
-    _Generic((obj), \
-        atomic_bool * : atomic_fetch_and_bool, \
-        const atomic_bool * : atomic_fetch_and_bool, \
-        atomic_char * : atomic_fetch_and_char, \
-        const atomic_char * : atomic_fetch_and_char, \
-        atomic_schar * : atomic_fetch_and_schar, \
-        const atomic_schar * : atomic_fetch_and_schar, \
-        atomic_uchar * : atomic_fetch_and_uchar, \
-        const atomic_uchar * : atomic_fetch_and_uchar, \
-        atomic_short * : atomic_fetch_and_short, \
-        const atomic_short * : atomic_fetch_and_short, \
-        atomic_ushort * : atomic_fetch_and_ushort, \
-        const atomic_ushort * : atomic_fetch_and_ushort, \
-        atomic_int * : atomic_fetch_and_int, \
-        const atomic_int * : atomic_fetch_and_int, \
-        atomic_uint * : atomic_fetch_and_uint, \
-        const atomic_uint * : atomic_fetch_and_uint, \
-        atomic_long * : atomic_fetch_and_long, \
-        const atomic_long * : atomic_fetch_and_long, \
-        atomic_ulong * : atomic_fetch_and_ulong, \
-        const atomic_ulong * : atomic_fetch_and_ulong, \
-        atomic_llong * : atomic_fetch_and_llong, \
-        const atomic_llong * : atomic_fetch_and_llong, \
-        atomic_ullong * : atomic_fetch_and_ullong, \
-        const atomic_ullong * : atomic_fetch_and_ullong, \
-        atomic_intptr_t * : atomic_fetch_and_intptr_t, \
-        const atomic_intptr_t * : atomic_fetch_and_intptr_t, \
-        atomic_uintptr_t * : atomic_fetch_and_uintptr_t, \
-        const atomic_uintptr_t * : atomic_fetch_and_uintptr_t, \
-        atomic_size_t * : atomic_fetch_and_size_t, \
-        const atomic_size_t * : atomic_fetch_and_size_t, \
-        atomic_ptrdiff_t * : atomic_fetch_and_ptrdiff_t, \
-        const atomic_ptrdiff_t * : atomic_fetch_and_ptrdiff_t, \
-        atomic_intmax_t * : atomic_fetch_and_intmax_t, \
-        const atomic_intmax_t * : atomic_fetch_and_intmax_t, \
-        atomic_uintmax_t * :  atomic_fetch_and_uintmax_t \
-    )(obj, arg)
-
-#define atomic_fetch_and_explicit(obj, arg, order) atomic_fetch_and(obj, arg)
-
-atomic_fetch_op(atomic_fetch_or_bool, atomic_bool, _Bool, |)
-atomic_fetch_op(atomic_fetch_or_char, atomic_char, char, |)
-atomic_fetch_op(atomic_fetch_or_schar, atomic_schar, signed char, |)
-atomic_fetch_op(atomic_fetch_or_uchar, atomic_uchar, unsigned char, |)
-atomic_fetch_op(atomic_fetch_or_short, atomic_short, short, |)
-atomic_fetch_op(atomic_fetch_or_ushort, atomic_ushort, unsigned short, |)
-atomic_fetch_op(atomic_fetch_or_int, atomic_int, int, |)
-atomic_fetch_op(atomic_fetch_or_uint, atomic_uint, unsigned int, |)
-atomic_fetch_op(atomic_fetch_or_long, atomic_long, long, |)
-atomic_fetch_op(atomic_fetch_or_ulong, atomic_ulong, unsigned long, |)
-atomic_fetch_op(atomic_fetch_or_llong, atomic_llong, long long, |)
-atomic_fetch_op(atomic_fetch_or_ullong, atomic_ullong, unsigned long long, |)
-atomic_fetch_op(atomic_fetch_or_intptr_t, atomic_intptr_t, intptr_t, |)
-atomic_fetch_op(atomic_fetch_or_uintptr_t, atomic_uintptr_t, uintptr_t, |)
-atomic_fetch_op(atomic_fetch_or_size_t, atomic_size_t, size_t, |)
-atomic_fetch_op(atomic_fetch_or_ptrdiff_t, atomic_ptrdiff_t, ptrdiff_t, |)
-atomic_fetch_op(atomic_fetch_or_intmax_t, atomic_intmax_t, intmax_t, |)
-atomic_fetch_op(atomic_fetch_or_uintmax_t, atomic_uintmax_t, uintmax_t, |)
-
-#define atomic_fetch_or(obj, arg) \
-    _Generic((obj), \
-        atomic_bool * : atomic_fetch_or_bool, \
-        const atomic_bool * : atomic_fetch_or_bool, \
-        atomic_char * : atomic_fetch_or_char, \
-        const atomic_char * : atomic_fetch_or_char, \
-        atomic_schar * : atomic_fetch_or_schar, \
-        const atomic_schar * : atomic_fetch_or_schar, \
-        atomic_uchar * : atomic_fetch_or_uchar, \
-        const atomic_uchar * : atomic_fetch_or_uchar, \
-        atomic_short * : atomic_fetch_or_short, \
-        const atomic_short * : atomic_fetch_or_short, \
-        atomic_ushort * : atomic_fetch_or_ushort, \
-        const atomic_ushort * : atomic_fetch_or_ushort, \
-        atomic_int * : atomic_fetch_or_int, \
-        const atomic_int * : atomic_fetch_or_int, \
-        atomic_uint * : atomic_fetch_or_uint, \
-        const atomic_uint * : atomic_fetch_or_uint, \
-        atomic_long * : atomic_fetch_or_long, \
-        const atomic_long * : atomic_fetch_or_long, \
-        atomic_ulong * : atomic_fetch_or_ulong, \
-        const atomic_ulong * : atomic_fetch_or_ulong, \
-        atomic_llong * : atomic_fetch_or_llong, \
-        const atomic_llong * : atomic_fetch_or_llong, \
-        atomic_ullong * : atomic_fetch_or_ullong, \
-        const atomic_ullong * : atomic_fetch_or_ullong, \
-        atomic_intptr_t * : atomic_fetch_or_intptr_t, \
-        const atomic_intptr_t * : atomic_fetch_or_intptr_t, \
-        atomic_uintptr_t * : atomic_fetch_or_uintptr_t, \
-        const atomic_uintptr_t * : atomic_fetch_or_uintptr_t, \
-        atomic_size_t * : atomic_fetch_or_size_t, \
-        const atomic_size_t * : atomic_fetch_or_size_t, \
-        atomic_ptrdiff_t * : atomic_fetch_or_ptrdiff_t, \
-        const atomic_ptrdiff_t * : atomic_fetch_or_ptrdiff_t, \
-        atomic_intmax_t * : atomic_fetch_or_intmax_t, \
-        const atomic_intmax_t * : atomic_fetch_or_intmax_t, \
-        atomic_uintmax_t * :  atomic_fetch_or_uintmax_t \
-    )(obj, arg)
-
-#define atomic_fetch_or_explicit(obj, arg, order) atomic_fetch_or(obj, arg)
-
-atomic_fetch_op(atomic_fetch_xor_bool, atomic_bool, _Bool, ^)
-atomic_fetch_op(atomic_fetch_xor_char, atomic_char, char, ^)
-atomic_fetch_op(atomic_fetch_xor_schar, atomic_schar, signed char, ^)
-atomic_fetch_op(atomic_fetch_xor_uchar, atomic_uchar, unsigned char, ^)
-atomic_fetch_op(atomic_fetch_xor_short, atomic_short, short, ^)
-atomic_fetch_op(atomic_fetch_xor_ushort, atomic_ushort, unsigned short, ^)
-atomic_fetch_op(atomic_fetch_xor_int, atomic_int, int, ^)
-atomic_fetch_op(atomic_fetch_xor_uint, atomic_uint, unsigned int, ^)
-atomic_fetch_op(atomic_fetch_xor_long, atomic_long, long, ^)
-atomic_fetch_op(atomic_fetch_xor_ulong, atomic_ulong, unsigned long, ^)
-atomic_fetch_op(atomic_fetch_xor_llong, atomic_llong, long long, ^)
-atomic_fetch_op(atomic_fetch_xor_ullong, atomic_ullong, unsigned long long, ^)
-atomic_fetch_op(atomic_fetch_xor_intptr_t, atomic_intptr_t, intptr_t, ^)
-atomic_fetch_op(atomic_fetch_xor_uintptr_t, atomic_uintptr_t, uintptr_t, ^)
-atomic_fetch_op(atomic_fetch_xor_size_t, atomic_size_t, size_t, ^)
-atomic_fetch_op(atomic_fetch_xor_ptrdiff_t, atomic_ptrdiff_t, ptrdiff_t, ^)
-atomic_fetch_op(atomic_fetch_xor_intmax_t, atomic_intmax_t, intmax_t, ^)
-atomic_fetch_op(atomic_fetch_xor_uintmax_t, atomic_uintmax_t, uintmax_t, ^)
-
-#define atomic_fetch_xor(obj, arg) \
-    _Generic((obj), \
-        atomic_bool * : atomic_fetch_xor_bool, \
-        const atomic_bool * : atomic_fetch_xor_bool, \
-        atomic_char * : atomic_fetch_xor_char, \
-        const atomic_char * : atomic_fetch_xor_char, \
-        atomic_schar * : atomic_fetch_xor_schar, \
-        const atomic_schar * : atomic_fetch_xor_schar, \
-        atomic_uchar * : atomic_fetch_xor_uchar, \
-        const atomic_uchar * : atomic_fetch_xor_uchar, \
-        atomic_short * : atomic_fetch_xor_short, \
-        const atomic_short * : atomic_fetch_xor_short, \
-        atomic_ushort * : atomic_fetch_xor_ushort, \
-        const atomic_ushort * : atomic_fetch_xor_ushort, \
-        atomic_int * : atomic_fetch_xor_int, \
-        const atomic_int * : atomic_fetch_xor_int, \
-        atomic_uint * : atomic_fetch_xor_uint, \
-        const atomic_uint * : atomic_fetch_xor_uint, \
-        atomic_long * : atomic_fetch_xor_long, \
-        const atomic_long * : atomic_fetch_xor_long, \
-        atomic_ulong * : atomic_fetch_xor_ulong, \
-        const atomic_ulong * : atomic_fetch_xor_ulong, \
-        atomic_llong * : atomic_fetch_xor_llong, \
-        const atomic_llong * : atomic_fetch_xor_llong, \
-        atomic_ullong * : atomic_fetch_xor_ullong, \
-        const atomic_ullong * : atomic_fetch_xor_ullong, \
-        atomic_intptr_t * : atomic_fetch_xor_intptr_t, \
-        const atomic_intptr_t * : atomic_fetch_xor_intptr_t, \
-        atomic_uintptr_t * : atomic_fetch_xor_uintptr_t, \
-        const atomic_uintptr_t * : atomic_fetch_xor_uintptr_t, \
-        atomic_size_t * : atomic_fetch_xor_size_t, \
-        const atomic_size_t * : atomic_fetch_xor_size_t, \
-        atomic_ptrdiff_t * : atomic_fetch_xor_ptrdiff_t, \
-        const atomic_ptrdiff_t * : atomic_fetch_xor_ptrdiff_t, \
-        atomic_intmax_t * : atomic_fetch_xor_intmax_t, \
-        const atomic_intmax_t * : atomic_fetch_xor_intmax_t, \
-        atomic_uintmax_t * :  atomic_fetch_xor_uintmax_t \
-    )(obj, arg)
-
-#define atomic_fetch_xor_explicit(obj, arg, order) atomic_fetch_xor(obj, arg)
 
 static inline _Bool atomic_flag_test_and_set(atomic_flag* obj) {
     char val = 0;

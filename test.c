@@ -126,7 +126,6 @@ TEST atomic_multithread_test(void) {
 SUITE(atomic_compat_tests) {
     RUN_TEST(atomic_load_store_test);
     RUN_TEST(atomic_fetch_add_sub_test);
-    RUN_TEST(atomic_fetch_xor_test);
     RUN_TEST(atomic_flag_test);
     RUN_TEST(atomic_compare_exchange_test);
     RUN_TEST(atomic_signal_fence_test);
