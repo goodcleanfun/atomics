@@ -72,6 +72,9 @@ jobs:
           curl -L https://github.com/silentbicycle/greatest/raw/release/greatest.h -o deps\greatest\greatest.h
           mkdir -p deps\threading
           curl -L https://raw.githubusercontent.com/goodcleanfun/threading/refs/heads/main/src/threading.h -o deps\threading\threading.h
+      - name: MSVC Preprocessor
+        run: |
+          cl /E /P src\atomics.h
       - name: Run tests with MSVC
         run: make CC=cl CFLAGS="/std:c11 /volatile:iso" test
 
