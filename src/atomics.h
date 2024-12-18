@@ -479,7 +479,7 @@ static inline unsigned long long atomic_fetch_add_ullong(atomic_ullong *obj, uns
 }
 
 static inline void *atomic_fetch_add_ptr(atomic_ptr *obj, ptrdiff_t val) {
-    return ATOMICS_CONCAT(ms_interlocked_exchange_add_, PTR_SIZE)((PTR_INTRINSIC volatile *)obj, val);
+    return (void *)ATOMICS_CONCAT(ms_interlocked_exchange_add_, PTR_SIZE)((PTR_INTRINSIC volatile *)obj, (PTR_INTRINSIC)val);
 }
 
 #define atomic_fetch_add(obj, arg) \
