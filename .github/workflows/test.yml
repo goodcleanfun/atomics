@@ -72,24 +72,6 @@ jobs:
           mkdir -p deps\threading
           curl -L https://raw.githubusercontent.com/goodcleanfun/threading/refs/heads/main/src/threading.h -o deps\threading\threading.h
       - name: Run tests with MSVC
-        run: make CC=cl CFLAGS="/std:c11 /volatile:iso" test
-
-  test-windows-msvc-c11atomics:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ilammy/msvc-dev-cmd@v1
-      - name: Install dependencies
-        run: |
-          choco install make
-          choco install curl
-      - name: Install deps
-        run: |
-          mkdir -p deps\greatest
-          curl -L https://github.com/silentbicycle/greatest/raw/release/greatest.h -o deps\greatest\greatest.h
-          mkdir -p deps\threading
-          curl -L https://raw.githubusercontent.com/goodcleanfun/threading/refs/heads/main/src/threading.h -o deps\threading\threading.h
-      - name: Run tests with MSVC
         run: make CC=cl CFLAGS="/std:c11 /volatile:iso /experimental:c11atomics" test
 
   test-windows-mingw:
