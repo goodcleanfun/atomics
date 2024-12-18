@@ -40,7 +40,7 @@ typedef _Atomic uintmax_t atomic_uintmax_t;
 typedef void * _Atomic atomic_ptr;
 
 #define ATOMICS_CONCAT_(a, b) a##b
-#define ATOMICS_CONCAT(a, b) CONCAT_(a, b)
+#define ATOMICS_CONCAT(a, b) ATOMICS_CONCAT_(a, b)
 
 
 #if UINTPTR_MAX == 0xFFFFFFFFFFFFFFFFull
