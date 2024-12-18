@@ -112,7 +112,6 @@ static inline void *atomic_load_ptr(const atomic_ptr *obj) {
 
 #define atomic_load(obj) \
     _Generic((obj), \
-        atomic_bool *: atomic_load_bool, \
         atomic_char *: atomic_load_char, \
         atomic_uchar *: atomic_load_uchar, \
         atomic_short *: atomic_load_short, \
