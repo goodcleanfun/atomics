@@ -287,7 +287,7 @@ static inline _Bool atomic_compare_exchange_ullong(atomic_ullong *obj, unsigned 
 
 static inline _Bool atomic_compare_exchange_ptr(atomic_ptr *obj, void **expected, void *desired) {
     ptrdiff_t cmp = *(ptrdiff_t *)expected;
-    ptrdiff_t val = CONCAT(ms_interlocked_compare_exchange_, PTR_SIZE)((PTR_INTRINSIC volatile *)obj, (ptrdiff_t)val, (ptrdiff_t)desired);
+    ptrdiff_t val = ATOMICS_CONCAT(ms_interlocked_compare_exchange_, PTR_SIZE)((PTR_INTRINSIC volatile *)obj, (ptrdiff_t)val, (ptrdiff_t)desired);
     return (ptrdiff_t)val == cmp;
 }
 
