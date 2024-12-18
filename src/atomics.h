@@ -76,38 +76,38 @@ typedef enum {
 #define ATOMIC_LLONG_LOCK_FREE 1
 #define ATOMIC_POINTER_LOCK_FREE 1
 
-static inline char atomic_load_char(const atomic_char *obj) {
+static inline char atomic_load_char(atomic_char *obj) {
     char val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned char atomic_load_uchar(const atomic_uchar *obj) {
+static inline unsigned char atomic_load_uchar(atomic_uchar *obj) {
     unsigned char val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline short atomic_load_short(const atomic_short *obj) {
+static inline short atomic_load_short(atomic_short *obj) {
     short val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned short atomic_load_ushort(const atomic_ushort *obj) {
+static inline unsigned short atomic_load_ushort(atomic_ushort *obj) {
     unsigned short val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline int atomic_load_int(const atomic_int *obj) {
+static inline int atomic_load_int(atomic_int *obj) {
     int val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned int atomic_load_uint(const atomic_uint *obj) {
+static inline unsigned int atomic_load_uint(atomic_uint *obj) {
     unsigned int val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline long atomic_load_long(const atomic_long *obj) {
+static inline long atomic_load_long(atomic_long *obj) {
     long val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned long atomic_load_ulong(const atomic_ulong *obj) {
+static inline unsigned long atomic_load_ulong(atomic_ulong *obj) {
     unsigned long val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline long long atomic_load_llong(const atomic_llong *obj) {
+static inline long long atomic_load_llong(atomic_llong *obj) {
     long long val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
-static inline unsigned long long atomic_load_ullong(const atomic_ullong *obj) {
+static inline unsigned long long atomic_load_ullong(atomic_ullong *obj) {
     unsigned long long val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
 
-static inline void *atomic_load_ptr(const atomic_ptr *obj) {
+static inline void *atomic_load_ptr(atomic_ptr *obj) {
     void *val; _ReadBarrier(); val = *obj; _ReadWriteBarrier(); return val;
 }
 
