@@ -56,13 +56,20 @@ typedef void * _Atomic atomic_ptr;
 
 typedef struct atomic_flag { atomic_bool _Value; } atomic_flag;
 
-typedef enum {
-    memory_order_relaxed = 0,
-    memory_order_consume = 1,
-    memory_order_acquire = 2,
-    memory_order_release = 3,
-    memory_order_acq_rel = 4,
-    memory_order_seq_cst = 5
+#define __ATOMIC_RELAXED 0
+#define __ATOMIC_CONSUME 1
+#define __ATOMIC_ACQUIRE 2
+#define __ATOMIC_RELEASE 3
+#define __ATOMIC_ACQ_REL 4
+#define __ATOMIC_SEQ_CST 5
+
+typedef enum memory_order {
+    memory_order_relaxed = __ATOMIC_RELAXED,
+    memory_order_consume = __ATOMIC_CONSUME,
+    memory_order_acquire = __ATOMIC_ACQUIRE,
+    memory_order_release = __ATOMIC_RELEASE,
+    memory_order_acq_rel = __ATOMIC_ACQ_REL,
+    memory_order_seq_cst = __ATOMIC_SEQ_CST
 } memory_order;
 
 #define ATOMIC_BOOL_LOCK_FREE 1
