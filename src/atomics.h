@@ -190,7 +190,6 @@ static inline atomic_exchange_ptr(atomic_ptr *obj, void *desired) {
 
 #define atomic_exchange(obj, desired) \
     _Generic((obj), \
-        atomic_bool *: atomic_exchange_bool, \
         atomic_char *: atomic_exchange_char, \
         atomic_uchar *: atomic_exchange_uchar, \
         atomic_short *: atomic_exchange_short, \
@@ -611,12 +610,12 @@ atomic_fetch_op_ptr(atomic_fetch_xor_ptr, ^)
 #define atomic_fetch_xor_explicit(obj, arg, order) atomic_fetch_xor(obj, arg)
 
 static _Bool atomic_flag_test_and_set(atomic_flag *obj) {
-    _Bool val = 0;
-    return atomic_compare_exchange_strong(&(obj->_Value), &val, 1) ? 0: 1;
+    unsigned char val = 0;
+    return atomic_compare_exchange_strong((atomic_uchar *)&(obj->_Value), &val, 1) ? 0: 1;
 }
 
 static void atomic_flag_clear(atomic_flag* obj) {
-    atomic_store(&(obj->_Value), 0);
+    atomic_store_explicit(&(obj->_Value), 0, memory_order_relaxed);
 }
 
 #define atomic_flag_test_and_set_explicit(obj, order) atomic_flag_test_and_set(obj)
