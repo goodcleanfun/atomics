@@ -615,7 +615,7 @@ static _Bool atomic_flag_test_and_set(atomic_flag *obj) {
 }
 
 static void atomic_flag_clear(atomic_flag* obj) {
-    atomic_store_explicit(&(obj->_Value), 0, memory_order_relaxed);
+    atomic_store_explicit((atomic_uchar *)&(obj->_Value), 0, memory_order_relaxed);
 }
 
 #define atomic_flag_test_and_set_explicit(obj, order) atomic_flag_test_and_set(obj)
