@@ -1,7 +1,7 @@
 #ifndef ATOMICS_H
 #define ATOMICS_H
 
-#if defined(_MSC_VER) && !defined(__clang__)
+#if defined(_MSC_VER) && !defined(__clang__) && ((defined(__STDC_NO_ATOMICS__) && __STDC_NO_ATOMICS__) || !defined(__STDC_VERSION__) || __STDC_VERSION__ < 201112L)
 #include <stdint.h>
 #include <stddef.h>
 
