@@ -200,14 +200,15 @@ static inline atomic_exchange_ptr(atomic_ptr *obj, void *desired) {
         atomic_ulong *: atomic_exchange_ulong, \
         atomic_llong *: atomic_exchange_llong, \
         atomic_ullong *: atomic_exchange_ullong, \
+        atomic_ptr *: atomic_exchange_ptr \
     )(obj, desired)
 
 #define atomic_store(obj, desired) atomic_exchange(obj, desired)
 #define atomic_exchange_explicit(obj, desired, order) atomic_exchange(obj, desired)
 #define atomic_store_explicit(obj, desired, order) atomic_exchange(obj, desired)
 
-#define atomic_init(PTR, VAL) \
-    atomic_store_explicit((PTR), (VAL), memory_order_relaxed)
+#define atomic_init(ptr, val) \
+    atomic_store_explicit(ptr, val, memory_order_relaxed)
 
 static inline __int8 ms_interlocked_compare_exchange_i8(__int8 volatile *addr, __int8 exchange, __int8 compare) {
     return _InterlockedCompareExchange8(addr, exchange, compare);
