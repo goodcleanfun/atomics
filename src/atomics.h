@@ -42,6 +42,7 @@ typedef void * _Atomic atomic_ptr;
 #define ATOMICS_CONCAT_(a, b) a##b
 #define ATOMICS_CONCAT(a, b) ATOMICS_CONCAT_(a, b)
 
+#define ATOMIC_FLAG_INIT { 0 }
 
 #if UINTPTR_MAX == 0xFFFFFFFFFFFFFFFFull
 #define PTR_INTRINSIC __int64
