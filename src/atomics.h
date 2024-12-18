@@ -235,55 +235,55 @@ static inline _Bool atomic_compare_exchange_char(atomic_char *obj, char *expecte
 
 static inline _Bool atomic_compare_exchange_uchar(atomic_uchar *obj, unsigned char *expected, unsigned char desired) {
     unsigned char cmp = *expected;
-    unsigned char val = ms_interlocked_compare_exchange_i8((volatile __int8 *)obj, (__int8)cmp, (__int8)desired);
+    unsigned char val = ms_interlocked_compare_exchange_i8((__int8 volatile *)obj, (__int8)cmp, (__int8)desired);
     return val == cmp;
 }
 
 static inline _Bool atomic_compare_exchange_short(atomic_short *obj, short *expected, short desired) {
     short cmp = *expected;
-    short val = ms_interlocked_compare_exchange_i16((volatile __int16 *)obj, (__int16)cmp, (__int16)desired);
+    short val = ms_interlocked_compare_exchange_i16((__int16 volatile *)obj, (__int16)cmp, (__int16)desired);
     return val == cmp;
 }
 
 static inline _Bool atomic_compare_exchange_ushort(atomic_ushort *obj, unsigned short *expected, unsigned short desired) {
     unsigned short cmp = *expected;
-    unsigned short val = ms_interlocked_compare_exchange_i16((volatile __int16 *)obj, (__int16)cmp, (__int16)desired);
+    unsigned short val = ms_interlocked_compare_exchange_i16((__int16 volatile *)obj, (__int16)cmp, (__int16)desired);
     return val == cmp;
 }
 
 static inline _Bool atomic_compare_exchange_int(atomic_int *obj, int *expected, int desired) {
     int cmp = *expected;
-    int val = ms_interlocked_compare_exchange_i32((volatile __int32 *)obj, (__int32)cmp, (__int32)desired);
+    int val = ms_interlocked_compare_exchange_i32((__int32 volatile *)obj, (__int32)cmp, (__int32)desired);
     return val == cmp;
 }
 
 static inline _Bool atomic_compare_exchange_uint(atomic_uint *obj, unsigned int *expected, unsigned int desired) {
     unsigned int cmp = *expected;
-    unsigned int val = ms_interlocked_compare_exchange_i32((volatile __int32 *)obj, (__int32)cmp, (__int32)desired);
+    unsigned int val = ms_interlocked_compare_exchange_i32((__int32 volatile *)obj, (__int32)cmp, (__int32)desired);
     return val == cmp;
 }
 
 static inline _Bool atomic_compare_exchange_long(atomic_long *obj, long *expected, long desired) {
     long cmp = *expected;
-    long val = ms_interlocked_compare_exchange_i32((volatile __int32 *)obj, (__int32)cmp, (__int32)desired);
+    long val = ms_interlocked_compare_exchange_i32((__int32 volatile *)obj, (__int32)cmp, (__int32)desired);
     return val == cmp;
 }
 
 static inline _Bool atomic_compare_exchange_ulong(atomic_ulong *obj, unsigned long *expected, unsigned long desired) {
     unsigned long cmp = *expected;
-    unsigned long val = ms_interlocked_compare_exchange_i32((volatile __int32 *)obj, (__int32)cmp, (__int32)desired);
+    unsigned long val = ms_interlocked_compare_exchange_i32((__int32 volatile *)obj, (__int32)cmp, (__int32)desired);
     return val == cmp;
 }
 
 static inline _Bool atomic_compare_exchange_llong(atomic_llong *obj, long long *expected, long long desired) {
     long long cmp = *expected;
-    long long val = ms_interlocked_compare_exchange_i64((volatile __int64 *)obj, (__int64)cmp, (__int64)desired);
+    long long val = ms_interlocked_compare_exchange_i64((__int64 volatile *)obj, (__int64)cmp, (__int64)desired);
     return val == cmp;
 }
 
 static inline _Bool atomic_compare_exchange_ullong(atomic_ullong *obj, unsigned long long *expected, unsigned long long desired) {
     unsigned long long cmp = *expected;
-    unsigned long long val = ms_interlocked_compare_exchange_i64((volatile __int64 *)obj, (__int64)cmp, (__int64)desired);
+    unsigned long long val = ms_interlocked_compare_exchange_i64((__int64 volatile *)obj, (__int64)cmp, (__int64)desired);
     return val == cmp;
 }
 
