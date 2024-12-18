@@ -211,20 +211,20 @@ static inline atomic_exchange_ptr(atomic_ptr *obj, void *desired) {
 #define atomic_init(ptr, val) \
     atomic_store_explicit(ptr, val, memory_order_relaxed)
 
-static inline __int8 ms_interlocked_compare_exchange_i8(__int8 volatile *addr, __int8 exchange, __int8 compare) {
-    return _InterlockedCompareExchange8(addr, exchange, compare);
+static inline __int8 ms_interlocked_compare_exchange_i8(__int8 volatile *addr, __int8 oldval, __int8 newval) {
+    return _InterlockedCompareExchange8(addr, newval, oldval);
 }
 
-static inline __int16 ms_interlocked_compare_exchange_i16(__int16 volatile *addr, __int16 exchange, __int16 compare) {
-    return _InterlockedCompareExchange16((__int16 *)addr, exchange, compare);
+static inline __int16 ms_interlocked_compare_exchange_i16(__int16 volatile *addr, __int16 oldval, __int16 newval) {
+    return _InterlockedCompareExchange16((__int16 *)addr, newval, oldval);
 }
 
-static inline __int32 ms_interlocked_compare_exchange_i32(__int32 volatile *addr, __int32 exchange, __int32 compare) {
-    return _InterlockedCompareExchange((long *)addr, exchange, compare);
+static inline __int32 ms_interlocked_compare_exchange_i32(__int32 volatile *addr, __int32 oldval, __int32 newval) {
+    return _InterlockedCompareExchange((long *)addr, newval, oldval);
 }
 
-static inline __int64 ms_interlocked_compare_exchange_i64(__int64 volatile *addr, __int64 exchange, __int64 compare) {
-    return _InterlockedCompareExchange64((__int64 *)addr, exchange, compare);
+static inline __int64 ms_interlocked_compare_exchange_i64(__int64 volatile *addr, __int64 oldval, __int64 newval) {
+    return _InterlockedCompareExchange64((__int64 *)addr, newval, oldval);
 }
 
 static inline _Bool atomic_compare_exchange_char(atomic_char *obj, char *expected, char desired) {
@@ -504,11 +504,11 @@ static inline void *atomic_fetch_add_ptr(atomic_ptr *obj, ptrdiff_t val) {
 #define atomic_fetch_sub_explicit(obj, arg, order) atomic_fetch_sub(obj, arg)
 
 #define atomic_fetch_op(name, atomic_type, type, op) \
-    static inline type name(atomic_type *obj, type val) { \
+    static inline type name(atomic_type *obj, type arg) { \
         type oldval, newval; \
         do { \
             oldval = atomic_load(obj); \
-            newval = oldval op val; \
+            newval = oldval op arg; \
         } while (!(atomic_compare_exchange_strong(obj, &oldval, newval))); \
         return oldval; \
     }
